@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relfor</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,700italic,300,700,600'
+          rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Gabriela' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/><link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/><link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
+</head>
+<body>
+
+<div id="content">
+    <div id="left-side">
+        <h1 id="head-logo"><a href="home.html" >Relfor</a></h1>
+        <div id="left-nav">
+            <a href="about.html" class="hover-link">About</a>
+            <a href="projects.html" class="hover-link">Projects</a>
+
+            <form id="search-form" method="get" action="/search"><input value="Search" type="text" id="query" class="hover-link"
+                                                                        name="query"
+                                                                        autocomplete="off"/></form>
+            <ul id="search-suggestions"></ul>
+        </div>
+
+    </div>
+    <div id="right-side">
+        <form action="/login" method="post">
+
+            <input type="password" placeholder="password" style="margin: auto"/>
+
+        </form>
+    </div>
+</div>
+<script defer src="../static/js/jquery.js"></script>
+<script defer src="../../../cook/cook.js"></script>
+<script defer src="../static/js/core.js"></script>
+<script defer src="../static/js/search.js"></script>
+
+</body>
+</html>

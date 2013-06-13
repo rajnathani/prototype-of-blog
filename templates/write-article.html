@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relfor</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,700italic,300,700,600'
+          rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Gabriela' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/chosen.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/><link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/><link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
+
+</head>
+<body>
+
+<div id="content">
+    <div id="left-side">
+        <h1 id="head-logo"><a href="home.html">Relfor</a></h1>
+
+        <div id="left-nav">
+            <a href="about.html" class="hover-link">About</a>
+            <a href="projects.html" class="hover-link">Projects</a>
+
+            <form id="search-form" method="get" action="/search"><input value="Search" type="text" id="query"
+                                                                        class="hover-link"
+                                                                        name="query"
+                                                                        autocomplete="off"/></form>
+            <ul id="search-suggestions"></ul>
+        </div>
+
+    </div>
+    <div id="right-side">
+        <form id="article-editor" method="post" class="cf">
+            <aside>
+                <textarea placeholder="Subject" class="article-head"></textarea>
+                <textarea placeholder="Content"></textarea>
+            </aside>
+            <aside>
+                <input id="number-of-categories" name="number-of-categories" type="hidden" value="0"/>
+                <select id="category-placeholder" style="display: none;">
+                    <option>Music</option>
+                    <option>Web</option>
+                    <option>Sports</option>
+                </select>
+                <input type="submit" value="Post"/>
+                <button id="bu-add-category" style="display: block">Add Category</button>
+                <button id="bu-remove-category" style="display: block; visibility: hidden">Remove Category</button>
+
+
+            </aside>
+        </form>
+    </div>
+</div>
+<script defer src="../static/js/jquery.js"></script>
+<script defer src="../static/js/jquery.autosize-min.js"></script>
+<script defer src="../static/js/chosen.jquery.min.js"></script>
+<script defer src="../../../cook/cook.js"></script>
+<script defer src="../static/js/core.js"></script>
+<script defer src="../static/js/search.js"></script>
+<script defer src="../static/js/article-editor.js"></script>
+
+</body>
+</html>

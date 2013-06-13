@@ -1,0 +1,609 @@
+/*
+ current color: #ff475a
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none !important;
+    line-height: 133%;
+    direction: ltr;
+}
+
+a:focus, input:focus, textarea:focus, select:focus, button:focus {
+
+    outline: none !important;
+}
+
+a:focus, select:focus, button:focus {
+    text-shadow: 1px 1px 13px #ff475a;
+
+}
+
+textarea {
+    resize: none;
+}
+
+input, button {
+    background-color: transparent;
+}
+
+input[type=submit], button, .button {
+    cursor: pointer;
+    font-family: 'Gabriela';
+    font-size: 20px;
+}
+
+input[type=submit]:hover, button:hover, .button:hover {
+
+    color: #ff475a;
+}
+
+input[type=submit]:active, button:active, .button:active {
+
+    color: #e40000;
+}
+
+.context-menu {
+    background-color: rgb(50, 50, 50);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    color: #ffffff;
+}
+
+.context-menu * {
+    color: #ffffff;
+}
+
+::selection {
+    background-color: #ff909a;
+    color: inherit;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    min-width: 400px;
+    cursor: default;
+    direction: ltr;
+}
+
+body, input, textarea, select, option, optgroup {
+    color: rgb(50, 50, 50);
+    font-family: 'Open Sans';
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.normal-link {
+    color: #ff475a;
+}
+
+.hover-link:hover {
+    color: #ff475a !important;
+}
+
+.hover-link:active {
+    color: #e40000 !important;
+}
+
+.gab {
+    font-family: 'Gabriela';
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+th {
+    text-align: left
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+h4 {
+    font-size: 20px;
+
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h6 {
+    font-size: inherit;
+}
+
+@-webkit-keyframes slide-left-fade-in {
+    from {
+        -webkit-transform: translate(25px, 0);
+        opacity: 0.2;
+    }
+    to {
+        -webkit-transform: translate(0, 0);
+    }
+}
+
+@-webkit-keyframes slide-right-fade-in {
+    from {
+        -webkit-transform: translate(-25px, 0);
+        opacity: 0.2;
+    }
+    to {
+        -webkit-transform: translate(0, 0);
+    }
+}
+
+@-webkit-keyframes slide-down-fade-in {
+    from {
+        -webkit-transform: translate(0, -25px);
+        opacity: 0.2;
+    }
+    to {
+        -webkit-transform: translate(0, 0);
+    }
+}
+
+@-webkit-keyframes logo-show {
+    0% {
+
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+
+        -webkit-transform: rotate(360deg);
+    }
+
+}
+
+/* Source: http://nicolasgallagher.com/micro-clearfix-hack/ */
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+
+.no-animation {
+    -webkit-animation: none !important;
+    animation: none !important;
+}
+
+.slide-left {
+    -webkit-animation: slide-left-fade-in 520ms;
+}
+
+.article-content {
+    line-height: 1.5em;
+}
+
+#left-side {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: fixed;
+    height: 100%;
+    width: 15%;
+    padding-top: 50px;
+    color: black;
+    background-color: transparent;
+
+}
+
+#left-side, #left-side * {
+    font-family: 'Gabriela';
+}
+
+#head-logo {
+    cursor: default;
+    font-size: 40px;
+    text-align: right;
+
+}
+
+#left-nav {
+    margin-top: 35px;
+}
+
+#left-nav input:focus {
+    outline: none;
+    color: gray;
+}
+
+#left-nav a, #left-nav input {
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 8px 0;
+    cursor: pointer;
+    display: block;
+    text-align: right;
+    font-size: 20px;
+    color: gray;
+
+    -webkit-transition: all 200ms;
+    transition: all 200ms;
+}
+
+#left-nav a.selected-nav {
+    cursor: default;
+    color: #ff475a !important;
+}
+
+div.icon-sprite-holder {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    background-image: url('../imgs/nav-icons-sprite.png');
+    background-repeat: no-repeat;
+}
+
+div.article-sprite {
+    background-position: 0 -25px;
+}
+
+div.task-sprite {
+    background-position: 0 -48px;
+}
+
+div.home-sprite {
+    background-position: 0 -1px;
+}
+
+div.members-sprite {
+    background-position: 0 -73px;
+}
+
+div.category-sprite {
+    background-position: 0 -101px;
+}
+
+#search-suggestions li {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 8px;
+    padding-right: 20px;
+    width: 100%;
+    background-color: white;
+}
+
+#search-suggestions {
+    display: none;
+    width: 200px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: absolute;
+    background-color: transparent;
+
+    z-index: 10;
+}
+
+#search-suggestions li {
+    position: relative;
+    cursor: pointer;
+    list-style-type: none;
+
+}
+
+#search-suggestions li#spotlight {
+    background-colo: #facbe5;
+    color: #ff475a;
+}
+
+/*Sprites*/
+#search-suggestions li > div {
+    right: 0px;
+    top: 6px;
+}
+
+#right-side {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding-top: 50px;
+    width: auto;
+    margin-left: 21%;
+    -webkit-animation: slide-left-fade-in 520ms;
+}
+
+#right-side.constricted {
+    width: 670px;
+}
+
+#articles li {
+    margin-bottom: 40px;
+    list-style-type: none;
+}
+
+.article-head {
+    margin-bottom: 19px;
+    font-family: 'Gabriela';
+    line-height: 110%;
+    font-size: 40px;
+}
+
+.article-head a {
+    line-height: 110%;
+}
+
+.article > div:first-child {
+    float: left;
+    margin-bottom: 10px;
+    width: 600px;
+    max-width: 600px;
+    -webkit-animation: slide-down-fade-in 520ms;
+}
+
+.article div {
+    font-family: 'Open Sans';
+
+}
+
+.article-meta {
+    float: left;
+    margin-left: 3%;
+    width: 300px;
+    max-width: 300px;
+    padding-top: 50px;
+    -webkit-animation: slide-left-fade-in 1020ms;
+}
+
+.article-meta > div:first-child {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 70px;
+    color: silver;
+    line-height: 123%;
+}
+
+.article-meta .categories > a {
+    display: block;
+    text-align: center;
+    font-family: 'Gabriela';
+    font-size: 20px;
+    color: inherit;
+}
+
+.article-meta .categories > a:hover:after {
+    content: "~";
+}
+
+.article-meta .categories > a:hover:before {
+    content: "~";
+}
+
+
+#about-area,#about-area *, .projects, .projects *{
+    line-height: 1.5em;
+}
+#about-area > ul > li {
+    margin-top: 15px;
+
+}
+
+#about-area li {
+    margin-left: 22px;
+}
+
+.projects-category {
+    margin-bottom: 40px;
+}
+
+.project-list li {
+    margin-left: 0;
+    margin-bottom: 50px;
+    height: 100px;
+    list-style-type: none;
+    text-align: right;
+    -webkit-animation: slide-right-fade-in 520ms;
+}
+
+.project-list li:nth-child(even) {
+    text-align: right;
+    -webkit-animation: slide-left-fade-in 520ms;
+}
+
+.project-list li p {
+    display: none;
+}
+
+.project-list li img {
+    display: block;
+    float: left;
+    height: 50px;
+
+}
+
+.project-list li:nth-child(even) img {
+    display: block;
+    float: left;
+    height: 50px;
+
+}
+
+#control-panel > h1 {
+    margin-bottom: 35px;
+}
+
+#control-panel #cp-nav > a {
+    display: block;
+    margin: 8px 0;
+    color: gray;
+    font-size: 20px;
+}
+
+#control-panel .manage-nav {
+    margin: 10px 0;
+}
+
+#cp-table {
+    table-layout: fixed;
+}
+
+#cp-table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#cp-table td, #cp-table th {
+    padding: 5px 10px;
+}
+
+#cp-table tr td:first-child, #cp-table tr th:first-child {
+    padding-left: 0;
+    max-width: 370px;
+}
+
+#cp-table tr td:last-child:hover {
+    display: none;
+}
+
+#article-editor {
+    width: 100%;
+}
+
+#article-editor textarea {
+    width: 100%;
+    display: block;
+    resize: none;
+}
+
+#article-editor > aside {
+    float: left;
+}
+
+#article-editor > aside:first-child {
+    width: 600px;
+}
+
+#article-editor > aside:last-child {
+    padding-left: 30px;
+}
+
+#article-editor  input[type=submit] {
+    font-size: 40px;
+    line-height: 100%;
+    margin-bottom: 20px;
+}
+
+.pictures-grid {
+    width: 560px;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-flow: row wrap;
+
+}
+
+.pictures-grid > div {
+    width: 130px;
+    height: 130px;
+    margin: 0 10px 10px 0;
+    background-position: top left;
+
+    -webkit-transition: background 2000ms;
+}
+
+.pictures-grid > div:hover {
+
+    background-position: right bottom;
+}
+
+.pictures-grid > div:active {
+
+    opacity: 0.7;
+
+}
+
+#comments-section {
+    padding: 60px 0 120px 0;
+    clear: both;
+    width: 600px;
+    max-width: 600px;
+}
+
+#comments-section > h4 {
+    margin-bottom: 15px;
+}
+
+#comments-section > ul li {
+    margin-bottom: 29px;
+    position: relative;
+    list-style-type: none;
+}
+
+#comments-section > ul li > img {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 70px;
+    height: 70px;
+
+}
+
+#comments-section > ul li > div {
+    float: left;
+    margin-left: 90px;
+    line-height: 1.5em;
+}
+
+#comments-section >ul li >div:last-child {
+
+    float: right;
+    color: silver;
+}
+
+#non-comment-details {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#non-comment-details > input {
+    width: 140px;
+    padding-right: 10px;
+    float: left;
+}
+
+#non-comment-details > input:last-child {
+    padding-right: 0;
+    width: 300px;
+}
+
+#comment-content {
+    width: 510px;
+    line-height: 1.5em;
+}
+
+#leave-comment button {
+    display: block;
+
+}
