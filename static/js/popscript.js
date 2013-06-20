@@ -13,7 +13,9 @@ var popscript = {
         popup_animation_out_keyframes_name:'out-pop',
         animation_out_duration:410,
 
-        align_check:[20,350,900]
+        align_check:[20, 350, 900]
+
+
 
 
     },
@@ -25,14 +27,30 @@ var popscript = {
         popup_class:'popup-popup popup-large'
     },
     error:{
-        popup_class:'popup-popup error-popup'
+        popup_class:'popup-popup error-popup',
+        'top':'45px',
+        popup_animation_out_keyframes_name:'out-error'
 
     }
 };
 
+for (var k in popscript) {
+    if (k.indexOf(" ") !== -1){
+        console.error("PopScript Error 2: Invalid Pop Class Name: '" + popscript[k] + "'");
+        alert("PopScript Error 2: Invalid Pop Class Name: '" + popscript[k] + "'");
+    }
+}
+
 var _total_pops_created = 0;
 var _rough_total_pops_atm = 0;
-var _original_key_down = null;
+
+
+function _escapePopOut(e) {
+    var keycode = e ? e.keyCode : (window.event).keyCode;
+    if (keycode === 27) {
+        popOut();
+    }
+}
 
 //Source: Mozilla Development Network
 function _animationPossible() {
@@ -107,8 +125,8 @@ var Pop = function (pop_class) {
     this.pop_class_list = _checkValidPopClasses(pop_class);
     this.compiled = this.pop_class_list ? _compilePopClass(this.pop_class_list) : {};
     this.isValid = function () {
-        return this.pop_class_list === false;
-    }
+        return this.pop_class_list;
+    };
     this.scan = function (attr) {
         return this.compiled[attr];
     }
@@ -149,7 +167,6 @@ function _findMarginTopByNode(node) {
     node.style.visibility = "visible";
     document.body.removeChild(appended_node);
     return _findMarginTopByHeight(h);
-
 }
 
 function _findMarginTopByHeight(h) {
@@ -159,6 +176,15 @@ function _findMarginTopByHeight(h) {
     }
     else {
         return (parseInt((window_height - (h)) / 2.0)) + _getScrolled()
+    }
+}
+
+function _findNonAutoMarginTop(pop_top) {
+    pop_top = pop_top.trim();
+    if (pop_top[pop_top.length - 1] === "%") {
+        return _getScrolled() + (parseFloat(_getInnerHeight()) * (parseInt(pop_top.match(/([\d]+)%/)[1]) / 100));
+    } else {
+        return _getScrolled() + parseInt(pop_top.match(/([\d]+)/)[1]);
     }
 }
 function pop(content, pop_input, extra_dict) {
@@ -177,6 +203,10 @@ function pop(content, pop_input, extra_dict) {
     var new_popscript_number = _total_pops_created + 1;
 
     var pop = new Pop(pop_input);
+    if (pop.isValid() === false) {
+
+        return false;
+    }
     increasePopup();
     var backy = document.createElement('div');
     backy.style.height = _getDocHeight() + "px";
@@ -195,28 +225,35 @@ function pop(content, pop_input, extra_dict) {
     var popy = document.createElement('div');
     popy.style.margin = 'auto';
     popy.style.position = 'relative';
-    backy.style.zIndex = '1000000';
+    popy.style.zIndex = '1000000';
+    var pop_top = pop.scan('top');
+    popy.setAttribute('data-popscript-top', pop_top);
     popy.className = pop.scan('popup_class');
 
-    var content_area;
     if ((content.substring) !== undefined) {
-        content_area = document.createElement('p');
-        content_area.appendChild(document.createTextNode(content));
+        popy.appendChild(document.createTextNode(content));
     } else {
-        content_area = content;
+        popy.appendChild(content);
     }
-    popy.appendChild(content_area);
 
-    //popy.style.marginTop = ((_getInnerHeight() / 4.55 + _getScrolled()) + "px");
-    popy.style.marginTop = _findMarginTopByNode(popy) + "px";
+
+    if (!pop_top || pop_top === "auto") {
+        popy.style.marginTop = _findMarginTopByNode(popy) + "px";
+    } else {
+        popy.style.marginTop = _findNonAutoMarginTop(pop_top) + "px";
+    }
     popy.id = 'popscript-popup-' + new_popscript_number;
 
 
     var redo_margin = function () {
-
         var inaction_popy = document.getElementById('popscript-popup-' + new_popscript_number);
-        inaction_popy.style.marginTop = _findMarginTopByHeight(inaction_popy.offsetHeight) + "px";
-
+        if (inaction_popy !== null) {
+            if (!pop_top || pop_top === "auto") {
+                inaction_popy.style.marginTop = _findMarginTopByHeight(inaction_popy.offsetHeight) + "px";
+            } else {
+                inaction_popy.style.marginTop = _findNonAutoMarginTop(pop_top) + "px";
+            }
+        }
     };
 
     var align_check = pop.scan('align_check');
@@ -261,16 +298,12 @@ function pop(content, pop_input, extra_dict) {
 
     document.body.appendChild(backy);
 
-    _original_key_down = document.onkeydown;
-    document.onkeydown = function (e) {
+    if (document.addEventListener) {
+        document.addEventListener('keydown', _escapePopOut, false);
+    } else if (document.detachEvent){
+        document.attachEvent('keydown', _escapePopOut);
+    }
 
-        var keycode = e ? e.keyCode : (window.event).keyCode;
-        if (keycode === 27) {
-            document.onkeydown = _original_key_down;
-
-            popOut();
-        }
-    };
 
     _total_pops_created++;
 }
@@ -307,7 +340,7 @@ function popOut() {
         _pAnimateOut(animation_out_length, document.getElementById('popscript-cover-' + current_highest_pop_num),
             animate_out_dict);
         decreasePopup();
-        document.keydown = _original_key_down;
+
 
     }
 }
@@ -342,9 +375,8 @@ function onePopLeft() {
 }
 
 function closePop() {
+
     if (!noPopsLeft()) {
-
-
         var pat = /popscript\-cover\-([\d]+)/;
         var cur_element = this;
 
@@ -384,7 +416,14 @@ function closePop() {
             _pAnimateOut(animation_out_length, document.getElementById('popscript-cover-' + pop_num),
                 animate_out_dict);
             decreasePopup();
-            document.keydown = _original_key_down;
+            if (noPopsLeft()) {
+                if (document.removeEventListener) {
+                    document.removeEventListener('keydown', _escapePopOut, false)
+                } else if (document.detachEvent) {
+                    document.detachEvent('keydown', _escapePopOut);
+                }
+            }
+
         }
     }
 }

@@ -42,6 +42,11 @@ function bring_json(url, data, func) {
 }
 
 
+function validEmail(email) {
+
+    var reg_email = /[A-Za-z0-9\._%\+\-]+@[A-Za-z0-9\._%\+\-]+\.[A-Za-z]{2,4}/;
+    return email !== undefined && email.substring && email.match(reg_email);
+}
 
 function isParent(element, id) {
     var cur_element = element;
@@ -101,6 +106,4 @@ function escapeState(elementID) {
             document.forceEscape = original_forceescape;
         }
     }
-
-
 }

@@ -9,6 +9,7 @@
         font-size: 50px;
 
     }
+
 }
 
 @media (max-width: 1155px) and (min-width:1100px) {
@@ -18,16 +19,17 @@
     }
 
     #articles li >div:last-child > div:first-child {
-
         font-size: 40px;
-
     }
+
 }
 
 @media (max-width: 1100px) {
+
     .article div:first-child {
         float: none;
     }
+
     .article-meta {
         float: none;
         margin-left: 0;
@@ -56,19 +58,27 @@
         content: "[" !important;
 
     }
+
     .article-meta .categories > a:after {
         content: "]" !important;
 
     }
 
-
 }
 
+@media (max-width: 1000px) {
+    #article-editor > aside:last-child {
+        position: relative;
+        margin: 0;
+    }
+
+}
 
 @media (max-width: 972px) {
     #left-side {
         width: 160px;
     }
+
     #right-side {
         margin-left: 220px;
     }
@@ -76,12 +86,40 @@
 }
 
 @media (max-width: 872px) {
+    .px40 {
+        font-size: 25px !important;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    h3 {
+        font-size: 21px;
+    }
+
+    h4 {
+        font-size: 19px;
+    }
+
+    h5 {
+        font-size: 17px;
+    }
+
+    h6 {
+        font-size: 16px;
+    }
 
     body {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         padding: 20px;
     }
+
     #left-side {
         position: relative;
         height: auto;
@@ -157,19 +195,20 @@
 
     #control-panel > h1 {
         margin: 12px 0 7px 0;
-        font-size:25px;
+        font-size: 25px;
     }
 
     .pictures-grid {
-        width:100%;
+        width: 100%;
     }
+
     .pictures-grid > div {
-        width:80px;
-        height:80px;
+        width: 80px;
+        height: 80px;
         margin: 0 10px 10px 0;
         background-position: 0 0;
 
-        -webkit-transition:background 2000ms;
+        -webkit-transition: background 2000ms;
     }
 
     #comments-section {
@@ -182,12 +221,16 @@
         width: 100% !important;
         padding-right: 0;
         float: none !important;
-        display: block!important;
+        display: block !important;
     }
 
     #comment-content {
-        width:100%;
+        width: 100%;
         max-width: 510px;
+    }
+
+    #article-editor > aside:first-child {
+        width: 100%;
     }
 
 }

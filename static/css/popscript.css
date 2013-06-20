@@ -126,6 +126,44 @@
     }
 }
 
+@-webkit-keyframes in-error {
+    from {
+        -webkit-transform: translate(0, -100px);
+    }
+    to {
+        -webkit-transform: translate(0, 0);
+    }
+}
+
+
+@keyframes in-error {
+    from {
+        transform: translate(0, -100px);
+    }
+    to {
+        transform: translate(0, 0);
+    }
+}
+
+@-webkit-keyframes out-error {
+    from {
+        -webkit-transform: translate(0, 0);
+    }
+    to {
+        -webkit-transform: translate(0, -100px);
+    }
+}
+
+
+@keyframes out-error {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(0, -100px);
+    }
+}
+
 
 
 
@@ -156,6 +194,8 @@
 
 .error-popup {
     background-color: #ff475a;
+    -webkit-animation:in-error 320ms;
+    animation:in-error 320ms;
 }
 
 

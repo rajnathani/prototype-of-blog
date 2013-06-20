@@ -1,5 +1,8 @@
 $('textarea').autosize();
 
+$('.default-category-select').chosen();
+
+
 
 function categoryCount(){
     return parseInt($('#number-of-categories').val());
@@ -38,3 +41,29 @@ $('#bu-add-category').click(function () {
     return false;
 
 });
+
+
+$('#bu-preview-article').click(function(){
+    var $this = $(this);
+    if ($this.hasClass('color')){
+        $this.removeClass('color');
+        $('#article-preview').hide();
+        $('textarea.article-content').show();
+    } else {
+        $this.addClass('color');
+
+        var $article_textarea = $('textarea.article-content');
+        var $article_preview = $('#article-preview');
+
+        $article_preview.html(markDown($article_textarea.val()));
+
+        $article_textarea.hide();
+        $article_preview.show();
+    }
+    return false;
+});
+
+function markDown(mark_down){
+    var converter = new Markdown.Converter();
+    return (converter.makeHtml(mark_down));
+}

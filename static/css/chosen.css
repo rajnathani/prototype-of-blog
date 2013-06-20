@@ -4,6 +4,7 @@
   position: relative;
   display: block;
   vertical-align: middle;
+    width:auto !important;
   /*zoom: 1;
   *display: inline;*/
 }
@@ -44,7 +45,7 @@
   height: 23px;
   line-height: 24px;
 
-  color: #444444;
+  /*color: #444444;*/
   text-decoration: none;
 }
 .chzn-container-single .chzn-default {
@@ -52,6 +53,8 @@
 }
 .chzn-container-single .chzn-single span {
   margin-right: 26px;
+    font-size: 20px;
+    font-family: 'Gabriela';
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -67,7 +70,7 @@
   width: 12px;
   height: 12px;
   font-size: 1px;
-  background: url('chosen-sprite.png') -42px 1px no-repeat;
+  /*background: url('chosen-sprite.png') -42px 1px no-repeat;*/
 }
 .chzn-container-single .chzn-single abbr:hover {
   background-position: -42px -10px;
