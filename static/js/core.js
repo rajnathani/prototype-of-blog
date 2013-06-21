@@ -1,3 +1,8 @@
+_path_name = window.location.pathname;
+function skinTesting(){
+
+    return window.location.href.match(/^file:\/\/\//);
+}
 function add_animation(node, animation_name, duration) {
     var animation_content = animation_name + ' ' + duration + 'ms';
     if (node.style !== undefined) {
@@ -18,23 +23,44 @@ function remove_animation(node) {
 function is_there(node) {
     return node !== undefined;
 }
-function go_ajax(url, method, data, success_func) {
+function go_ajax(url, method, data, success_func, extra_dict) {
     if (!is_there(success_func)) {
         success_func = function () {
             location.reload();
         }
     }
 
-    $.ajax({
+    var remove_loading = function(jx, status){
+        $('.loading').hide();
+    };
+    var complete_functions;
+    if (extra_dict.complete){
+        if ($.isArray(extra_dict.complete)){
+            extra_dict.complete.push(remove_loading);
+            complete_functions = extra_dict.complete;
+        } else {
+            complete_functions = [extra_dict.complete,remove_loading];
+        }
+    } else {
+        complete_functions = remove_loading;
+    }
+    var ajax_dict = {
         url:url,
         type:method,
         data:JSON.stringify(data),
         contentType:"application/json;charset=UTF-8",
+
         success:success_func,
+        complete:complete_functions,
         error:function () {
-            alert('something went wrong');
+            pop('Something went wrong, your request could not be completed.', 'error');
         }
-    });
+    };
+
+    if (extra_dict.context){
+        ajax_dict.context = extra_dict.context;
+    }
+    $.ajax(ajax_dict);
 }
 
 function bring_json(url, data, func) {

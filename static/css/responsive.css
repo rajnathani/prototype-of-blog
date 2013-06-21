@@ -133,6 +133,9 @@
         font-size: 25px;
     }
 
+    #cp-table tr td:last-child {
+        display: table-cell;
+    }
     #cp-table tr td:last-child:hover {
         cursor: pointer;
     }

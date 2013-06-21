@@ -31,12 +31,12 @@
     <div id="right-side">
         <form id="article-editor" method="post" class="cf">
             <aside>
-                <textarea placeholder="Title" maxlength="140" class="article-head" rows="1"></textarea>
-                <textarea placeholder="Content" rows="10" class="article-content"></textarea>
+                <textarea placeholder="Title" maxlength="140" class="article-head" rows="1">Where does it come from?</textarea>
+                <textarea placeholder="Content"  rows="10" class="article-content">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</textarea>
                 <div id="article-preview" class="article-content" style="display: none"></div>
             </aside>
             <aside>
-                <input id="number-of-categories" name="number-of-categories" type="hidden" value="0"/>
+                <input id="number-of-categories" name="number-of-categories" type="hidden" value="2"/>
                 <select id="category-placeholder" style="display: none;">
                     <option>Music</option>
                     <option>Web</option>
@@ -45,7 +45,17 @@
                 <input type="submit" value="Post" class="px40"/>
                 <button value="preview-article" id="bu-preview-article">Preview</button>
                 <button id="bu-add-category" style="display: block">Add Category</button>
-                <button id="bu-remove-category" style="display: block; visibility: hidden">Remove Category</button>
+                <button id="bu-remove-category" style="display: block;">Remove Category</button>
+                <select id="category-1" class="default-category-select">
+                    <option>Music</option>
+                    <option selected="selected">Web</option>
+                    <option>Sports</option>
+                </select>
+                <select id="category-2" class="default-category-select">
+                    <option>Music</option>
+                    <option>Web</option>
+                    <option selected="selected">Sports</option>
+                </select>
 
 
             </aside>
@@ -59,6 +69,8 @@
 <script defer src="../static/js/core.js"></script>
 <script defer src="../static/js/search.js"></script>
 <script defer src="../static/js/page-down.js"></script>
+
+
 <script defer src="../static/js/article-editor.js"></script>
 
 </body>
