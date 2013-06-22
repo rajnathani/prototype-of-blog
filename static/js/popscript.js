@@ -2,40 +2,45 @@
 
 //Configuration Manifest
 var popscript = {
-    basic:{
-        popup_class:'popup-popup',
-        cover_class:'popup-cover',
+    basic: {
+        popup_class: 'popup-popup',
+        cover_class: 'popup-cover',
 
-        close_pop:true,
-        close_pop_class:'popup-close',
+        close_pop: true,
+        close_pop_class: 'popup-close',
 
-        cover_animation_out_keyframes_name:'out-backy',
-        popup_animation_out_keyframes_name:'out-pop',
-        animation_out_duration:410,
+        cover_animation_out_keyframes_name: 'out-backy',
+        popup_animation_out_keyframes_name: 'out-pop',
+        animation_out_duration: 410,
 
-        align_check:[20, 350, 900]
-
-
-
+        align_check: [20, 350, 900]
 
     },
-    slide:{
-        popup_class:'popup-popup arrive-right',
-        popup_animation_out_keyframes_name:'depart-right cubic-bezier(1,0,.46,1)'
-    },
-    large:{
-        popup_class:'popup-popup popup-large'
-    },
-    error:{
-        popup_class:'popup-popup error-popup',
-        'top':'45px',
-        popup_animation_out_keyframes_name:'out-error'
 
+
+    slide: {
+        popup_class: 'popup-popup arrive-right',
+        popup_animation_out_keyframes_name: 'depart-right cubic-bezier(1,0,.46,1)'
+    },
+    large: {
+        popup_class: 'popup-popup popup-large'
+    },
+    error: {
+        popup_class: 'popup-popup error-popup',
+        'top': '45px',
+        popup_animation_out_keyframes_name: 'top-fly',
+        'close_pop':'popup-close no-hover-close'
+    },
+    success: {
+        popup_class: 'popup-popup success-popup',
+        'top': '45px',
+        popup_animation_out_keyframes_name: 'top-fly',
+        'close_pop':'popup-close no-hover-close'
     }
 };
 
 for (var k in popscript) {
-    if (k.indexOf(" ") !== -1){
+    if (k.indexOf(" ") !== -1) {
         console.error("PopScript Error 2: Invalid Pop Class Name: '" + popscript[k] + "'");
         alert("PopScript Error 2: Invalid Pop Class Name: '" + popscript[k] + "'");
     }
@@ -216,7 +221,10 @@ function pop(content, pop_input, extra_dict) {
     backy.style.left = '0';
     backy.style.right = '0';
     backy.style.zIndex = '999999';
-    backy.className = pop.scan('cover_class');
+    var given_cover_class = pop.scan('cover_class');
+    if (given_cover_class && given_cover_class !== 'none'){
+        backy.className = pop.scan('cover_class');
+    }
     backy.setAttribute('data-pop', pop_input);
     backy.id = 'popscript-cover-' + new_popscript_number;
     backy.onclick = closePop;
@@ -300,7 +308,7 @@ function pop(content, pop_input, extra_dict) {
 
     if (document.addEventListener) {
         document.addEventListener('keydown', _escapePopOut, false);
-    } else if (document.detachEvent){
+    } else if (document.detachEvent) {
         document.attachEvent('keydown', _escapePopOut);
     }
 
@@ -438,12 +446,14 @@ function _pAnimateOut(delay_length, main, todo) {
         }, delay);
         for (var key in todo) {
             var value = todo[key];
-            var key_node = document.getElementById(key);
-            key_node.style.animation = (value + ' ' + delay_length + 'ms');
-            key_node.style.webkitAnimation = (value + ' ' + delay_length + 'ms');
-            key_node.style.mozAnimation = (value + ' ' + delay_length + 'ms');
-            key_node.style.oAnimation = (value + ' ' + delay_length + 'ms');
-            key_node.style.msAnimation = (value + ' ' + delay_length + 'ms');
+            if (value && value !== "none") {
+                var key_node = document.getElementById(key);
+                key_node.style.animation = (value + ' ' + delay_length + 'ms');
+                key_node.style.webkitAnimation = (value + ' ' + delay_length + 'ms');
+                key_node.style.mozAnimation = (value + ' ' + delay_length + 'ms');
+                key_node.style.oAnimation = (value + ' ' + delay_length + 'ms');
+                key_node.style.msAnimation = (value + ' ' + delay_length + 'ms');
+            }
         }
     } else {
         main.parentNode.removeChild(main);

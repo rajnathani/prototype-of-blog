@@ -1,6 +1,5 @@
 _path_name = window.location.pathname;
 function skinTesting(){
-
     return window.location.href.match(/^file:\/\/\//);
 }
 function add_animation(node, animation_name, duration) {

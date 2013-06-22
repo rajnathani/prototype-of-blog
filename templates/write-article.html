@@ -7,7 +7,9 @@
     <link href='http://fonts.googleapis.com/css?family=Gabriela' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" type="text/css" href="../static/css/chosen.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/><link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/><link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
 
 </head>
 <body>
@@ -29,10 +31,11 @@
 
     </div>
     <div id="right-side">
-        <form id="article-editor" method="post" class="cf">
+        <div id="article-editor" class="cf">
             <aside>
-                <textarea placeholder="Title" maxlength="140" class="article-head" rows="1"></textarea>
-                <textarea placeholder="Content" rows="10" class="article-content"></textarea>
+                <textarea placeholder="Title" maxlength="140" class="article-head" rows="1" id="x-head"></textarea>
+                <textarea placeholder="Content" rows="10" class="article-content" id="x-body"></textarea>
+
                 <div id="article-preview" class="article-content" style="display: none"></div>
             </aside>
             <aside>
@@ -42,20 +45,28 @@
                     <option>Web</option>
                     <option>Sports</option>
                 </select>
-                <input type="submit" value="Post" class="px40"/>
+                <button id="bu-save-article" data-created="0" class="px40"></button>
+
                 <button value="preview-article" id="bu-preview-article">Preview</button>
+                <!--ae is short for article editor-->
+                <div id="ae-article-read-only-details">
+                    <div data-published="1"></div>
+                    <div id="ae-created">created <span data-timestamp="1302384200" data-time-mode="2"></span></div>
+                    <div id="ae-last-saved">last saved <span data-timestamp="1302384200"></span></div>
+                </div>
                 <button id="bu-add-category" style="display: block">Add Category</button>
                 <button id="bu-remove-category" style="display: block; visibility: hidden">Remove Category</button>
-
-
             </aside>
-        </form>
+        </div>
     </div>
 </div>
 <script defer src="../static/js/jquery.js"></script>
 <script defer src="../static/js/jquery.autosize-min.js"></script>
 <script defer src="../static/js/chosen.jquery.min.js"></script>
 <script defer src="../static/js/cook.js"></script>
+<script defer src="../static/js/oneminute.js"></script>
+<script defer src="../static/js/popscript.js"></script>
+
 <script defer src="../static/js/core.js"></script>
 <script defer src="../static/js/search.js"></script>
 <script defer src="../static/js/page-down.js"></script>

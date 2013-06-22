@@ -613,13 +613,40 @@ div.category-sprite {
 
 #article-editor > aside:last-child {
     position: fixed;
+    overflow: auto;
+    height: 100%;
     margin-left: 635px;
 }
 
-#article-editor  input[type=submit] {
-
+#bu-save-article {
     line-height: 100%;
+}
 
+#bu-save-article[data-created="0"]:before{
+    content: "Create";
+}
+
+#bu-save-article[data-created="1"]:before{
+    content: "Save";
+}
+
+
+#ae-article-read-only-details div[data-published="0"]:after {
+    content:'Article Unpublished';
+    color:#ff475a;
+}
+
+#ae-article-read-only-details div[data-published="1"]:after {
+    content:'Article Published';
+    color:green;
+}
+
+#ae-article-read-only-details > div:not(:first-child) {
+    color:grey;
+}
+
+#ae-article-read-only-details {
+    margin-bottom: 20px;
 }
 
 #bu-preview-article {

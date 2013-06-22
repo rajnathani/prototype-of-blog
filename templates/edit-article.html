@@ -7,7 +7,9 @@
     <link href='http://fonts.googleapis.com/css?family=Gabriela' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" type="text/css" href="../static/css/chosen.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/><link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/><link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
 
 </head>
 <body>
@@ -29,10 +31,11 @@
 
     </div>
     <div id="right-side">
-        <form id="article-editor" method="post" class="cf">
+        <div id="article-editor" class="cf">
             <aside>
-                <textarea placeholder="Title" maxlength="140" class="article-head" rows="1">Where does it come from?</textarea>
-                <textarea placeholder="Content"  rows="10" class="article-content">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</textarea>
+                <textarea placeholder="Title" maxlength="140" class="article-head" rows="1" id="x-head">Lorem Ipsum is simply dummy text of the printing and typesetting industry</textarea>
+                <textarea placeholder="Content" rows="10" class="article-content" id="x-body">So let's begin: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</textarea>
+
                 <div id="article-preview" class="article-content" style="display: none"></div>
             </aside>
             <aside>
@@ -42,36 +45,43 @@
                     <option>Web</option>
                     <option>Sports</option>
                 </select>
-                <input type="submit" value="Post" class="px40"/>
+                <button id="bu-save-article" data-created="1" class="px40"></button>
+
                 <button value="preview-article" id="bu-preview-article">Preview</button>
+                <!--ae is short for article editor-->
+                <div id="ae-article-read-only-details">
+                    <div data-published="0"></div>
+                    <div id="ae-created" >created <span data-timestamp="1302384200" data-time-mode="2"></span></div>
+                    <div id="ae-last-saved" >last saved <span data-timestamp="1302384200"></span></div>
+                </div>
                 <button id="bu-add-category" style="display: block">Add Category</button>
-                <button id="bu-remove-category" style="display: block;">Remove Category</button>
-                <select id="category-1" class="default-category-select">
+                <button id="bu-remove-category" style="display: block; visibility: hidden">Remove Category</button>
+                <select id="category-1" class="x-article-category">
                     <option>Music</option>
                     <option selected="selected">Web</option>
                     <option>Sports</option>
                 </select>
-                <select id="category-2" class="default-category-select">
+                <select id="category-2" class="x-article-category">
                     <option>Music</option>
                     <option>Web</option>
                     <option selected="selected">Sports</option>
                 </select>
-
-
             </aside>
-        </form>
+        </div>
     </div>
 </div>
 <script defer src="../static/js/jquery.js"></script>
 <script defer src="../static/js/jquery.autosize-min.js"></script>
 <script defer src="../static/js/chosen.jquery.min.js"></script>
 <script defer src="../static/js/cook.js"></script>
+<script defer src="../static/js/oneminute.js"></script>
+<script defer src="../static/js/popscript.js"></script>
+
 <script defer src="../static/js/core.js"></script>
 <script defer src="../static/js/search.js"></script>
 <script defer src="../static/js/page-down.js"></script>
-
-
 <script defer src="../static/js/article-editor.js"></script>
 
 </body>
 </html>
+

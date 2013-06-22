@@ -1,17 +1,23 @@
 if (skinTesting() ||
-    _path_name.match(/write\-article$/) ||
-    _path_name.match(/\/edit$/)
+    _path_name.match(/article\/create\/?$/) ||
+    _path_name.match(/\/edit\/?$/)
     ) {
     $('textarea').autosize();
 
-    $('.default-category-select').chosen();
+    $('.x-article-category').chosen();
 
+    if (_path_name.match(/edit\/?$/) || _path_name.match(/edit-article\.html/)){
+        $('#bu-remove-category').css('visibility', 'visible');
+    } else {
+        $('#ae-created').hide();
+        $('#ae-last-saved').hide();
+    }
 
     $('.article-content').keyup(function (e) {
 
 
         if (e.keyCode === 16) {
-            $.data(this,'shift-pressed', false);
+            $.data(this, 'shift-pressed', false);
         }
     });
 
@@ -93,7 +99,7 @@ if (skinTesting() ||
         }
 
 
-        $('#bu-remove-category').after($('#category-placeholder').first().clone(false).attr('id', 'category-' + new_category_num).show());
+        $('#bu-remove-category').after($('#category-placeholder').first().clone(false).attr('id', 'category-' + new_category_num).addClass('x-article-category').show());
         $('#category-' + new_category_num).chosen();
         increaseCategory();
 
@@ -125,6 +131,119 @@ if (skinTesting() ||
     function markDown(mark_down) {
         var converter = new Markdown.Converter();
         return (converter.makeHtml(mark_down));
+    }
+
+
+    $('#bu-save-article').click(
+        function () {
+            var $this = $(this);
+            // Converting it to string so as to avoid confusion
+            // as to whether it will be returned as a string or a number
+            var data_created = $this.attr('data-created').toString();
+            if (data_created === "0") {
+                return createArticle.call(this);
+            } else if (data_created === "1") {
+                return saveArticle.call(this, $this.attr('data-link'));
+            }
+        }
+    );
+
+    function fetchArticleDetails() {
+        return dict = {
+            title: $('#x-head').val(),
+            content: $('#x-body').val(),
+            categories: fetchCategories()
+        };
+    }
+
+    function fetchCategories() {
+        var all_categories = [];
+        var category;
+        $('.x-article-category').each(function () {
+            category = $(this).val();
+            if (all_categories.indexOf(category) === -1) {
+                all_categories.push(category);
+            }
+        });
+        return all_categories;
+    }
+
+
+    function createArticle() {
+        var dict = fetchArticleDetails();
+        console.log(dict);
+
+        if (dict.title.length === 0) {
+            return pop('No title given', 'error');
+        }
+
+        if (true) {
+            perfCreateArticle.call(this, {link: dict.title.replace(/\s/g, "-")});
+        } else {
+            go_ajax('_/article', 'POST', dict, perfCreateArticle, {context: this});
+        }
+    }
+
+    function perfCreateArticle(dict) {
+        if (dict.error) {
+            return pop(dict.error, 'error');
+        }
+        // save is the save button, this is the
+        // save button supplied as the context
+        // by the jquery ajax call
+        var $save = $(this);
+
+        $save.attr('data-link', dict.link);
+        $save.attr('data-created', "1");
+
+        if (true) {
+
+        } else {
+            history.pushState({}, "", "/article/" + dict.link + "/edit");
+        }
+
+        pop('Article Successfully Created!', 'success');
+        $('#ae-created').show().find('span').attr('data-timestamp', cur_timestamp());
+        $('#ae-last-saved').show().find('span').attr('data-timestamp', cur_timestamp());
+
+        setTimeout(popOut, 700);
+    }
+
+
+    function saveArticle(link) {
+        var dict = fetchArticleDetails();
+        console.log(dict);
+
+        if (dict.title.length === 0) {
+            return pop('No title given', 'error');
+        }
+
+        if (true) {
+            perfSaveArticle({link: link});
+        } else {
+            go_ajax('_/article/' + link, 'PATCH', dict, perfSaveArticle);
+        }
+
+    }
+
+    function perfSaveArticle(dict) {
+        if (dict.error) {
+            return pop(dict.error, 'error');
+        }
+        // save is the save button, this is the
+        // save button supplied as the context
+        // by the jquery ajax call
+        var $save = $(this);
+        $save.attr('data-link', dict.link);
+
+        if (true) {
+
+        } else {
+            history.pushState({}, "", "/article/" + dict.link + "/edit");
+        }
+        pop('Article Successfully Saved!', 'success');
+        $('#ae-last-saved').find('span').attr('data-timestamp', cur_timestamp());
+        setTimeout(popOut, 700);
     }
 
 

@@ -126,7 +126,7 @@
     }
 }
 
-@-webkit-keyframes in-error {
+@-webkit-keyframes top-drop {
     from {
         -webkit-transform: translate(0, -100px);
     }
@@ -136,7 +136,7 @@
 }
 
 
-@keyframes in-error {
+@keyframes top-drop {
     from {
         transform: translate(0, -100px);
     }
@@ -145,7 +145,7 @@
     }
 }
 
-@-webkit-keyframes out-error {
+@-webkit-keyframes top-fly {
     from {
         -webkit-transform: translate(0, 0);
     }
@@ -155,7 +155,7 @@
 }
 
 
-@keyframes out-error {
+@keyframes top-fly {
     from {
         transform: translate(0, 0);
     }
@@ -194,10 +194,19 @@
 
 .error-popup {
     background-color: #ff475a;
-    -webkit-animation:in-error 320ms;
-    animation:in-error 320ms;
+    -webkit-animation:top-drop 320ms;
+    animation:top-drop 320ms;
 }
 
+.success-popup {
+    background-color: #3cba3d;
+    -webkit-animation:top-drop 320ms;
+    animation:top-drop 320ms;
+}
+
+.no-hover-close:hover{
+    background-color: transparent;
+}
 
 
 .popup-large {
