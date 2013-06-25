@@ -1,5 +1,6 @@
-_path_name = window.location.pathname;
-function skinTesting(){
+//Remove any trailing slash
+_path_name = window.location.pathname.replace(/\/$/, "");
+function skinTesting() {
     return window.location.href.match(/^file:\/\/\//);
 }
 function add_animation(node, animation_name, duration) {
@@ -8,7 +9,7 @@ function add_animation(node, animation_name, duration) {
         node.style.animation = animation_content;
         node.style.webkitAnimation = animation_content;
     } else {
-        node.css({'animation':animation_content, '-webkit-animation':animation_content});
+        node.css({'animation': animation_content, '-webkit-animation': animation_content});
     }
 }
 
@@ -18,48 +19,47 @@ function remove_animation(node) {
     return node;
 }
 
-
 function is_there(node) {
     return node !== undefined;
 }
 function go_ajax(url, method, data, success_func, extra_dict) {
-    if (!is_there(success_func)) {
-        success_func = function () {
-            location.reload();
-        }
-    }
+      if ($.type(data) === "function") {
+          var success_func_holder = success_func;
+          success_func = data;
+          extra_dict = success_func_holder;
+          data = undefined;
+      }
 
-    var remove_loading = function(jx, status){
-        $('.loading').hide();
-    };
-    var complete_functions;
-    if (extra_dict.complete){
-        if ($.isArray(extra_dict.complete)){
-            extra_dict.complete.push(remove_loading);
-            complete_functions = extra_dict.complete;
-        } else {
-            complete_functions = [extra_dict.complete,remove_loading];
-        }
-    } else {
-        complete_functions = remove_loading;
-    }
-    var ajax_dict = {
-        url:url,
-        type:method,
-        data:JSON.stringify(data),
-        contentType:"application/json;charset=UTF-8",
 
-        success:success_func,
-        complete:complete_functions,
-        error:function () {
+    /*var remove_loading = function (jx, status) {
+     $('.loading').hide();
+     };
+     var complete_functions;
+     if (extra_dict.complete) {
+     if ($.isArray(extra_dict.complete)) {
+     extra_dict.complete.push(remove_loading);
+     complete_functions = extra_dict.complete;
+     } else {
+     complete_functions = [extra_dict.complete, remove_loading];
+     }
+     } else {
+     complete_functions = remove_loading;
+     } */
+
+    $.ajax({
+        url: url,
+        type: method,
+        data: data ? JSON.stringify(data) : null,
+        contentType: "application/json;charset=UTF-8",
+
+        success: success_func,
+        complete: extra_dict && extra_dict.complete ? extra_dict.complete : null,
+        error: extra_dict && extra_dict.error ? extra_dict.error : function () {
             pop('Something went wrong, your request could not be completed.', 'error');
-        }
-    };
+        },
+        context: extra_dict && extra_dict.context ? extra_dict.content : null
 
-    if (extra_dict.context){
-        ajax_dict.context = extra_dict.context;
-    }
-    $.ajax(ajax_dict);
+    });
 }
 
 function bring_json(url, data, func) {
@@ -114,12 +114,12 @@ function escapeState(elementID) {
         }
     };
 
-     document.forceEscape = function(){
-         destroyByID(elementID);
-         document.onclick = original_onclick;
-         document.onkeydown = original_onkeydown;
-         document.forceEscape = original_forceescape;
-     };
+    document.forceEscape = function () {
+        destroyByID(elementID);
+        document.onclick = original_onclick;
+        document.onkeydown = original_onkeydown;
+        document.forceEscape = original_forceescape;
+    };
 
     document.onkeydown = function (e) {
 

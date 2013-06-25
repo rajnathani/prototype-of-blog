@@ -2,11 +2,10 @@
 <html>
 <head>
     <title>Relfor</title>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,700italic,300,700,600'
-          rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Gabriela' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/animations.css"/><link rel="stylesheet" type="text/css" href="../static/css/core.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
 </head>
@@ -30,8 +29,6 @@
     <div id="right-side">
         <div class="article cf">
             <div>
-                <input type="hidden" id="page-article-link" value="well-that-was-a-good-surprise"/>
-
                 <h1 class="article-head"><a href="article.html" class="hover-link">Well that was a good
                     surprise.</a></h1>
 
@@ -59,9 +56,11 @@
             </div>
             <div id="comments-section">
                 <h4 class="gab">Comments Section</h4>
+                <div class="loading more-comments"></div>
                 <ul>
-                    <li class="cf" data-comment-id="12">
-                        <img height="70" width="70" src='http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70'>
+                    <!--li class="cf" data-comment-id="12">
+                        <img height="70" width="70"
+                             src='http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70'>
 
                         <div>By default, images are presented at 80px by 80px if no size parameter is supplied. You may
                             request a specific image size, which will be dynamically delivered from Gravatar by using
@@ -76,7 +75,8 @@
                         </div>
                         <ul>
                             <li class="cf" data-comment-id="12">
-                                <img height="70" width="70" src='http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70'>
+                                <img height="70" width="70"
+                                     src='http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70'>
 
                                 <div>By default, images are presented at 80px by 80px if no size parameter is supplied.
                                     You may
@@ -97,7 +97,8 @@
 
                     </li>
                     <li class="cf" data-comment-id="22">
-                        <img height="70" width="70" src='http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70'>
+                        <img height="70" width="70"
+                             src='http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70'>
 
                         <div>By default, images are presented at 80px by 80px if no size parameter is supplied. You may
                             request a specific image size, which will be dynamically delivered from Gravatar by using
@@ -112,7 +113,8 @@
 
                     </li>
                     <li class="cf" data-comment-id="32">
-                        <img height="70" width="70" src='http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70'>
+                        <img height="70" width="70"
+                             src='http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70'>
 
                         <div>By default, images are presented at 80px by 80px if no size parameter is supplied. You may
                             request a specific image size, which will be dynamically delivered from Gravatar by using
@@ -129,17 +131,17 @@
                         <ul></ul>
 
 
-                    </li>
+                    </li-->
                 </ul>
                 <h4 class="gab">Leave a Comment</h4>
 
                 <div id="leave-comment" class="cf comment-form">
                     <div class="non-comment-details cf">
-                        <input type="text"  placeholder="Full Name" maxlength="100"/>
-                        <input type="email"  placeholder="Email Address" maxlength="255"/>
-                        <input type="url"  placeholder="Website/Blog (Optional)" maxlength="100"/>
+                        <input type="text" placeholder="Full Name" maxlength="100"/>
+                        <input type="email" placeholder="Email Address" maxlength="255"/>
+                        <input type="url" placeholder="Website/Blog (Optional)" maxlength="100"/>
                     </div>
-                    <textarea  placeholder="Comment..." maxlength="1000" rows="4"></textarea>
+                    <textarea placeholder="Comment..." maxlength="1000" rows="4"></textarea>
                     <button id="bu-post-comment">Post</button>
                 </div>
 

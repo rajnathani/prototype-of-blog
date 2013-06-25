@@ -2,27 +2,6 @@
  current color: #ff475a
 */
 
-/*Start of Animations*/
-
-@-webkit-keyframes loading {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-@keyframes loading {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-
-/*End of Animations*/
 
 * {
 
@@ -105,22 +84,32 @@ body {
 .loading {
     display: none;
     font-family: 'Gabriela';
-    font-size: 25px;
-    text-align: center;
-
-    -webkit-animation:loading 500ms infinite alternate;
-    animation:loading 500ms  infinite alternate;
+    -webkit-animation:fade-in-out 500ms infinite alternate;
+    animation:fade-in-out 500ms  infinite alternate;
+}
+.loading:before,.loading:after {
+    font-family: inherit;
 }
 
-.loading:after {
-    content: 'Relfor';
-}
 
 .loading.more-articles {
     margin: 10px 0 20px 0;
     width: 100%;
     max-width: 600px;
 
+    font-size: 25px;
+    text-align: center;
+}
+
+.loading.more-articles:after {
+    content: 'Relfor';
+}
+.loading.more-comments{
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+.loading.more-comments:after {
+    content:'Loading Comments';
 }
 
 a {
@@ -698,7 +687,7 @@ div.category-sprite {
 }
 
 #comments-section  ul li {
-    margin-bottom: 29px;
+    margin-bottom: 33px;
     min-height: 80px;
     position: relative;
     list-style-type: none;
@@ -764,10 +753,16 @@ div.category-sprite {
 .comment-form textarea {
     width: 510px;
     line-height: 1.5em;
+
 }
 
 .comment-form button {
     display: block;
+}
+
+#bu-post-comment {
+
+    float: right;
 }
 
 .bu-form-reply-comment:after {
