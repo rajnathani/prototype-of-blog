@@ -1,5 +1,5 @@
 if (skinTesting() ||
-    _path_name.match(/\/article\//)) {
+    _path_name.match(/^\/article\//)) {
     $('textarea').autosize();
 
     function pageArticleLink() {
@@ -22,7 +22,8 @@ if (skinTesting() ||
                         replies: [
                             {
                                 comment_id: "ergrhtredfhrter",
-                                name: 'George Carlin',
+                                name: 'Relfor',
+                                relfor: true,
                                 content: "???",
                                 img: "http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70",
                                 website: "",
@@ -43,11 +44,11 @@ if (skinTesting() ||
                 ]};
                 perfLoadComments(comments);
 
-            }, 2700);
+            }, 100);
         }
 
         else {
-            go_ajax(_path_name + '/_comments', perfLoadComments, {'error': function () {
+            go_ajax(_path_name + '/_comments', 'GET', perfLoadComments, {'error': function () {
 
                 return $('.loading.more-comments').removeClass('more-comments').show().html(span('Error Retrieving Comments',
                     {'class': 'color'}).outerHTML);
@@ -58,10 +59,12 @@ if (skinTesting() ||
     }
 
     function perfLoadComments(dict) {
+        console.log(dict);
         if (dict.error) {
-            return $('.loading.more-comments').after(div('Error Retrieving Comments', {'class': 'color', style:'font-size:20px; margin-bottom:25px'})).hide();
-
+            return $('.loading.more-comments').after(
+                div('Error Retrieving Comments', {'class': 'color', style: 'font-size:20px; margin-bottom:25px'})).hide();
         }
+
         $('.loading').hide();
 
         var comments = dict.comments;
@@ -71,9 +74,9 @@ if (skinTesting() ||
             for (var i = comments.length - 1; i >= 0; i--) {
                 comment_replies = [];
                 for (var j = 0; j < comments[i].replies.length; j++) {
-                    comment_replies.push(htmlCommentReply(comments[i].replies[j]));
+                    comment_replies.push(comment(comments[i].replies[j], {reply:true}));
                 }
-                comments_list.append(htmlComment(comments[i], comment_replies));
+                comments_list.append(comment(comments[i], {'children':comment_replies}));
 
             }
         }
@@ -117,30 +120,24 @@ if (skinTesting() ||
         if (!commentFormValidate(dict)) {
             return false;
         }
+        dict.parent_comment_id = "";
         if (true) {
             dict.created = cur_timestamp();
             dict.img = 'http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=70';
             dict.comment_id = Math.ceil(Math.random() * 100);
             perfPostComment(dict);
         } else {
-            go_ajax('/_article/' + pageArticleLink() + '/comment', 'POST', dict)
+            go_ajax(_path_name + '/_comments', 'POST', dict, function (ret_dict) {
+                ret_dict.created = cur_timestamp();
+                ret_dict.content = dict.content;
+                ret_dict.name = dict.name;
+                ret_dict.website = dict.website;
+                perfPostComment(ret_dict);
+            })
         }
 
     });
-    function htmlComment(dict, children) {
-        var name = dict.website ? a(dict.name, {'href': dict.website, 'class': 'hover-link'}) : span(dict.name);
-        return li({'class': 'cf slide-left', 'data-comment-id': dict.comment_id}, [
-            img({src: dict.img, height: 70, width: 70}),
-            div(dict.content),
-            div({'class': 'comment-meta'}, [
-                name, br(),
-                span({'data-timestamp': dict.created, 'data-time-mode': '2'}), br(),
-                button({'class': 'bu-form-reply-comment', 'click': buFormReplyComment})
-            ]),
-            ul(children ? children : undefined)
-        ])
 
-    }
 
     function perfPostComment(dict) {
         if (dict.error) {
@@ -152,7 +149,7 @@ if (skinTesting() ||
             scrollTop: $("#comments-section").offset().top
         }, 200);
 
-        $('#comments-section').children('ul').prepend(htmlComment(dict));
+        $('#comments-section').children('ul').prepend(comment(dict, {'children': []}));
 
         deleteCommentFormDetails($('#leave-comment'));
         pop(p({html: 'Your comment has been posted as of now, however confirmation is <b><i>required</i></b>.<br><br>' +
@@ -200,7 +197,7 @@ if (skinTesting() ||
         if (!commentFormValidate(dict)) {
             return false;
         }
-        dict.parent_comment_id = $(this).closest('li').attr('data-comment-id');
+        dict.parent_comment_id = parseInt($(this).closest('li').attr('data-comment-id'));
 
 
         if (true) {
@@ -209,23 +206,36 @@ if (skinTesting() ||
             dict.comment_id = Math.ceil(Math.random() * 100);
             perfReplyComment(dict)
         } else {
-            go_ajax('/_article/' + pageArticleLink() + '/comment', 'POST', dict, perfReplyComment)
+            go_ajax(_path_name + '/_comments', 'POST', dict, function (ret_dict) {
+                console.log(dict);
+                ret_dict.parent_comment_id = dict.parent_comment_id;
+                ret_dict.created = cur_timestamp();
+                ret_dict.content = dict.content;
+                ret_dict.name = dict.name;
+                ret_dict.website = dict.website;
+                perfReplyComment(ret_dict);
+            })
         }
     }
 
-    function htmlCommentReply(dict) {
-        var name = dict.website ? a(dict.name, {'href': dict.website, 'class': 'hover-link'}) : span(dict.name);
+
+    function comment(dict, options) {
+        options = options ? options : {};
         return li({'class': 'cf slide-left', 'data-comment-id': dict.comment_id}, [
             img({src: dict.img, height: 70, width: 70}),
             div(dict.content),
             div({'class': 'comment-meta'}, [
-                name, br(),
-                span({'data-timestamp': dict.created, 'data-time-mode': '2'})
-            ])
+                dict.relfor ? span(dict.name, { 'class': 'color gab'}) :
+                    (dict.website ? a(dict.name, {'href': dict.website, 'class': 'hover-link'}) : span(dict.name)), br(),
+                span({'data-timestamp': dict.created, 'data-time-mode': '2'}), br(),
+                options.children ?  button({'class': 'bu-form-reply-comment', 'click': buFormReplyComment}) : null
+            ]),
+            options.children ? ul(options.children) : null
         ])
     }
 
     function perfReplyComment(dict) {
+
         if (dict.error) {
             return pop(dict.error, 'error');
         }
@@ -233,7 +243,7 @@ if (skinTesting() ||
 
         var $parent_comment = $('[data-comment-id=' + dict.parent_comment_id + ']');
 
-        $parent_comment.find('ul').append(htmlCommentReply(dict));
+        $parent_comment.find('ul').append(comment(dict));
 
 
         $parent_comment.find('.comment-form').remove();

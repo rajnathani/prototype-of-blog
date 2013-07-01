@@ -1,5 +1,9 @@
 //Remove any trailing slash
+
 _path_name = window.location.pathname.replace(/\/$/, "");
+function updatePathName(){
+    _path_name = window.location.pathname.replace(/\/$/, "");
+}
 function skinTesting() {
     return window.location.href.match(/^file:\/\/\//);
 }
@@ -57,7 +61,7 @@ function go_ajax(url, method, data, success_func, extra_dict) {
         error: extra_dict && extra_dict.error ? extra_dict.error : function () {
             pop('Something went wrong, your request could not be completed.', 'error');
         },
-        context: extra_dict && extra_dict.context ? extra_dict.content : null
+        context: extra_dict && extra_dict.context ? extra_dict.context : null
 
     });
 }

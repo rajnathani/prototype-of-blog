@@ -89,19 +89,21 @@ function buSureDeleteArticle(link) {
 function buDeleteArticle(link) {
 
     if (true) {
-        perfDeleteArticle({link: link});
+        perfDeleteArticle({}, link);
     } else {
-        go_ajax('/_article/' + link, 'DELETE', {}, perfDeleteArticle);
+        go_ajax('/control-panel/_article/' + link, 'DELETE', {}, function(dict){perfDeleteArticle(dict,link)});
     }
     //pop(link);
 }
 
-function perfDeleteArticle(dict) {
+function perfDeleteArticle(dict, link) {
     if (dict.error) {
         return pop(dict.error, 'error');
     }
-    jam_manage_article_rows.filter('tr[data-link="' + dict.link + '"]').remove();
+    jam_manage_article_rows.filter('tr[data-link="' + link + '"]').remove();
     popOut();
+    pop('Article Deleted!', 'success');
+    setTimeout(popOut, 1100);
 }
 
 function buUnpublishArticle(link) {
@@ -111,7 +113,7 @@ function buUnpublishArticle(link) {
     if (true) {
         perfUnpublishArticle.call(ctx,{});
     } else {
-        go_ajax('/_article/' + link + '/unpublish', {}, perfUnpublishArticle, {context:ctx} )
+        go_ajax('/control-panel/_article/' + link + '/unpublish', 'PATCH',{}, perfUnpublishArticle, {context:ctx} )
     }
 }
 
@@ -120,8 +122,8 @@ function perfUnpublishArticle(dict) {
         return pop(dict.error, 'error');
     }
 
-    $(this).attr('data-published', "0");
-    pop('The article has been unpublished', 'slide');
+    $(this).attr('data-published', "false");
+    pop('The article has been unpublished', 'success');
     setTimeout(popOut,1000);
 }
 
@@ -132,7 +134,7 @@ function buPublishArticle(link) {
     if (true) {
         perfPublishArticle.call(ctx,{});
     } else {
-        go_ajax('/_article/' + link + '/publish', {}, perfPublishArticle, {context:ctx} )
+        go_ajax('/control-panel/_article/' + link + '/publish','PATCH', {}, perfPublishArticle, {context:ctx} )
     }
 
 }
@@ -141,8 +143,8 @@ function perfPublishArticle(dict) {
     if (dict.error) {
         return pop(dict.error, 'error');
     }
-    $(this).attr('data-published', "1");
-    pop('Article successfully published!', 'slide');
+    $(this).attr('data-published', "true");
+    pop('Article successfully published!', 'success');
     setTimeout(popOut,1000);
 }
 
@@ -154,7 +156,7 @@ function articleContextMenu(e) {
 
     var link = this.parentNode.getAttribute('data-link');
 
-    var published = $(this.parentNode).find('[data-published]').first().attr('data-published') === "1";
+    var published = $(this.parentNode).find('[data-published]').first().attr('data-published') === "true";
 
     var edit_publish_status = button(published ? 'unpublish' : 'publish', {style: 'display:block;', 'click': published ? function () {
         buUnpublishArticle(link)
@@ -164,7 +166,8 @@ function articleContextMenu(e) {
 
     document.body.appendChild(
         div({'class': 'context-menu', id: "art-context-menu", 'style': 'position:absolute; left:' + pos_x + 'px; top:' + pos_y + 'px'}, [
-            a('open', {href: '/article/' + link, 'class': 'button', 'style': 'display:block'}),
+            published ? a('open', {href: '/article/' + link, 'class': 'button', 'style': 'display:block'}) :
+                span('open', { 'class': 'button', 'style': 'display:block; color:rgb(150,150,150); cursor:default;'}),
             button('delete', {'style': 'display:block', 'click': function () {
                 buSureDeleteArticle(link)
             }}),
@@ -182,20 +185,22 @@ jam_manage_article_rows.find('td:first-child').on('contextmenu', articleContextM
 
 jam_manage_article_rows.find('td:last-child').on('click', articleContextMenu);
 
-function perfNewCategory(dict) {
+function perfNewCategory(dict, category_name) {
     if (dict.error) {
         return pop(dict.error, 'error');
     }
     $('#cp-table').find('tbody').append(
-        tr({ 'data-name': dict.name},
+        tr({ 'data-name': category_name},
             [
-                td([a(dict.name, {href: '/category/' + dict.name, class: 'hover-link' })], {contextmenu: categoryContextMenu}),
+                td([a(category_name, {href: '/category/' + category_name, class: 'hover-link' })], {contextmenu: categoryContextMenu}),
                 td('0 Articles'),
                 td({'click': categoryContextMenu})
             ]
         )
     );
     popOut();
+    pop('Category Successfully Created!', 'success');
+    setTimeout(popOut,500);
 
 
 }
@@ -204,9 +209,9 @@ function buCreateCategory(category_name) {
         return pop('Illegal characters in category name', 'error');
     } else {
         if (true) {
-            perfNewCategory({name: category_name});
+            perfNewCategory({}, category_name);
         } else {
-            go_ajax('/category/' + category_name, 'POST', {}, perfNewCategory);
+            go_ajax('/control-panel/_categories', 'POST', {name:category_name}, function(dict){perfNewCategory(dict, category_name)});
         }
     }
 }
@@ -240,20 +245,19 @@ function buSureDeleteCategory(name) {
     ), 'slide')
 }
 function buDeleteCategory(name) {
-
     if (true) {
-        perfDeleteCategory({name: name});
+        perfDeleteCategory({}, name);
     } else {
-        go_ajax('/_category/' + name, 'DELETE', {}, perfDeleteCategory);
+        go_ajax('/control-panel/_category/' + name, 'DELETE', {}, function(dict){perfDeleteCategory(dict, name)});
     }
 }
 
-function perfDeleteCategory(dict) {
+function perfDeleteCategory(dict, category_name) {
     if (dict.error) {
         return pop(dict.error, 'error');
     }
 
-    $('#cp-table.manage-categories').find('tr[data-name="' + dict.name + '"]').remove();
+    $('#cp-table.manage-categories').find('tr[data-name="' + category_name + '"]').remove();
     popOut();
 }
 

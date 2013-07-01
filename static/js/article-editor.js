@@ -6,11 +6,20 @@ if (skinTesting() ||
 
     $('.x-article-category').chosen();
 
-    if (_path_name.match(/edit\/?$/) || _path_name.match(/edit-article\.html/)){
+    if (_path_name.match(/edit\/?$/) || _path_name.match(/edit-article\.html/)) {
         $('#bu-remove-category').css('visibility', 'visible');
     } else {
+        $('[data-published]').hide();
         $('#ae-created').hide();
         $('#ae-last-saved').hide();
+    }
+
+    function urlArticleLink() {
+        if (true) {
+            return "foo-bar-article-2";
+        } else {
+            return _path_name.match(/^\/control\-panel\/article\/([\w\-]+)\/edit/)[1];
+        }
     }
 
     $('.article-content').keyup(function (e) {
@@ -139,11 +148,11 @@ if (skinTesting() ||
             var $this = $(this);
             // Converting it to string so as to avoid confusion
             // as to whether it will be returned as a string or a number
-            var data_created = $this.attr('data-created').toString();
-            if (data_created === "0") {
+            var data_article_created = $this.attr('data-article-created').toString();
+            if (data_article_created === "false") {
                 return createArticle.call(this);
-            } else if (data_created === "1") {
-                return saveArticle.call(this, $this.attr('data-link'));
+            } else if (data_article_created === "true") {
+                return saveArticle.call(this, urlArticleLink());
             }
         }
     );
@@ -151,7 +160,7 @@ if (skinTesting() ||
     function fetchArticleDetails() {
         return dict = {
             title: $('#x-head').val(),
-            content: $('#x-body').val(),
+            markdown: $('#x-body').val(),
             categories: fetchCategories()
         };
     }
@@ -161,17 +170,18 @@ if (skinTesting() ||
         var category;
         $('.x-article-category').each(function () {
             category = $(this).val();
-            if (all_categories.indexOf(category) === -1) {
+            if (category && all_categories.indexOf(category) === -1) {
                 all_categories.push(category);
             }
         });
+
         return all_categories;
     }
 
 
     function createArticle() {
         var dict = fetchArticleDetails();
-        console.log(dict);
+
 
         if (dict.title.length === 0) {
             return pop('No title given', 'error');
@@ -180,7 +190,7 @@ if (skinTesting() ||
         if (true) {
             perfCreateArticle.call(this, {link: dict.title.replace(/\s/g, "-")});
         } else {
-            go_ajax('_/article', 'POST', dict, perfCreateArticle, {context: this});
+            go_ajax('/control-panel/_articles', 'POST', dict, perfCreateArticle, {context: this});
         }
     }
 
@@ -192,17 +202,17 @@ if (skinTesting() ||
         // save button supplied as the context
         // by the jquery ajax call
         var $save = $(this);
-
-        $save.attr('data-link', dict.link);
-        $save.attr('data-created', "1");
+        $save.attr('data-article-created', "true");
 
         if (true) {
 
         } else {
-            history.pushState({}, "", "/article/" + dict.link + "/edit");
+            history.pushState({}, "", "/control-panel/article/" + dict.link + "/edit");
+            updatePathName();
         }
 
         pop('Article Successfully Created!', 'success');
+        $('[data-published]').show();
         $('#ae-created').show().find('span').attr('data-timestamp', cur_timestamp());
         $('#ae-last-saved').show().find('span').attr('data-timestamp', cur_timestamp());
 
@@ -212,7 +222,6 @@ if (skinTesting() ||
 
     function saveArticle(link) {
         var dict = fetchArticleDetails();
-        console.log(dict);
 
         if (dict.title.length === 0) {
             return pop('No title given', 'error');
@@ -221,7 +230,8 @@ if (skinTesting() ||
         if (true) {
             perfSaveArticle({link: link});
         } else {
-            go_ajax('_/article/' + link, 'PATCH', dict, perfSaveArticle);
+            go_ajax('/control-panel/_article/' + link, 'PATCH', dict, perfSaveArticle);
+
         }
 
     }
@@ -230,16 +240,12 @@ if (skinTesting() ||
         if (dict.error) {
             return pop(dict.error, 'error');
         }
-        // save is the save button, this is the
-        // save button supplied as the context
-        // by the jquery ajax call
-        var $save = $(this);
-        $save.attr('data-link', dict.link);
+
 
         if (true) {
 
         } else {
-            history.pushState({}, "", "/article/" + dict.link + "/edit");
+            //history.pushState({}, "", "/control-panel/article/" + urlArticleLink() + "/edit");
         }
         pop('Article Successfully Saved!', 'success');
         $('#ae-last-saved').find('span').attr('data-timestamp', cur_timestamp());

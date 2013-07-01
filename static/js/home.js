@@ -1,4 +1,4 @@
-if (_path_name.match(/\/?/) || _path_name.match(/home\.html$/)) {
+if (_path_name.match(/^\/?$/) || _path_name.match(/home\.html$/)) {
 
     function evCheckHomeScroll() {
         if ($(document).height() - ($(this).scrollTop() + $(window).height()) < 200) {
@@ -25,7 +25,7 @@ if (_path_name.match(/\/?/) || _path_name.match(/home\.html$/)) {
                     ]});
                 }, 1000);
             } else {
-                go_ajax('/_?last_link=' + last_link + '&timestamp=' + last_link_ts, 'GET', undefined, perfAppendMoreArticles,
+                go_ajax('/_?last_link=' + last_link + '&timestamp=' + last_link_ts, 'GET', perfAppendMoreArticles,
                     {'complete': function (jqXHR, text_status) {
                         $('.loading').hide();
                         if (["notmodified", "error", "timeout", "abort", "parsererror"].indexOf(text_status) !== -1) {

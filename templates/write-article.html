@@ -4,9 +4,10 @@
     <title>Relfor</title>
 
 
-
     <link rel="stylesheet" type="text/css" href="../static/css/chosen.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/fonts.css"/><link rel="stylesheet" type="text/css" href="../static/css/animations.css"/><link rel="stylesheet" type="text/css" href="../static/css/core.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/animations.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
 
@@ -44,17 +45,20 @@
                     <option>Web</option>
                     <option>Sports</option>
                 </select>
-                <button id="bu-save-article" data-created="0" class="px40"></button>
+                <button id="bu-save-article" data-article-created="false" class="px40"></button>
 
                 <button value="preview-article" id="bu-preview-article">Preview</button>
+                <a href="control-panel.html" class="button" >Quit</a>
                 <!--ae is short for article editor-->
                 <div id="ae-article-read-only-details">
-                    <div data-published="1"></div>
+                    <div data-published="false"></div>
                     <div id="ae-created">created <span data-timestamp="1302384200" data-time-mode="2"></span></div>
                     <div id="ae-last-saved">last saved <span data-timestamp="1302384200"></span></div>
                 </div>
+
                 <button id="bu-add-category" style="display: block">Add Category</button>
                 <button id="bu-remove-category" style="display: block; visibility: hidden">Remove Category</button>
+
             </aside>
         </div>
     </div>
