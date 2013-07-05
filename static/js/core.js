@@ -58,8 +58,14 @@ function go_ajax(url, method, data, success_func, extra_dict) {
 
         success: success_func,
         complete: extra_dict && extra_dict.complete ? extra_dict.complete : null,
-        error: extra_dict && extra_dict.error ? extra_dict.error : function () {
-            pop('Something went wrong, your request could not be completed.', 'error');
+        error: extra_dict && extra_dict.error ? extra_dict.error : function ($ajax) {
+            if ($ajax.statusCode === 500){
+                pop('Damn the server, something went wrong with it.', 'error');
+            } else if ($ajax.statusCode === 400){
+                pop('Something went wrong!')
+            } else {
+               pop('An error occurred', 'error')
+            }
         },
         context: extra_dict && extra_dict.context ? extra_dict.context : null
 
@@ -136,3 +142,4 @@ function escapeState(elementID) {
         }
     }
 }
+

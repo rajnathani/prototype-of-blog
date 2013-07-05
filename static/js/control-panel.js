@@ -5,14 +5,13 @@ function evUploadPictureChange() {
         var xhr = new XMLHttpRequest();
 
 
-        /* event listners */
         xhr.upload.addEventListener("progress", uploadProgress, false);
         xhr.addEventListener("load", uploadComplete, false);
         xhr.addEventListener("error", uploadFailed, false);
         xhr.addEventListener("abort", uploadCanceled, false);
-        /* Be sure to change the url below to the url of your upload server side script */
-        xhr.open("POST", "http://127.0.0.1:3000/img");
-        console.log(fd);
+
+        xhr.open("POST", "/control-panel/pictures/_upload");
+
         xhr.send(fd);
 
         $('#upload-progress').remove();
@@ -20,13 +19,6 @@ function evUploadPictureChange() {
         this.parentNode.appendChild(div({'id': 'upload-progress', 'class': 'cf', style: ' margin-top:10px;background-color:#4d161a; width:auto; height:10px;'}, [
             div({'id': 'progress-bar', 'style': 'float:left;width:0%; height:100%;background-color:#ff475a;-webkit-transition:all 400ms; transition:all 400ms;'})
         ]));
-        /*var reader = new FileReader();
-         reader.readAsDataURL(this.files[0]);
-
-         reader.onload = function(e){
-
-         pop(e.target.result);
-         } */
 
     }
 
@@ -36,11 +28,18 @@ function uploadProgress(data) {
     console.log('progressing');
     document.getElementById('progress-bar').style.width = parseInt((parseFloat(data.loaded) / data.total) * 100) + '%';
 }
-function uploadComplete() {
-    pop('Upload Complete!', 'slide');
-    setTimeout(function () {
-        popOut()
-    }, 1100)
+function uploadComplete(data) {
+    console.log(data);
+    try {
+        var dict = JSON.parse(data.target.response);
+    } catch (err) {
+        pop('The server did not seem to respond well to that', 'error');
+    }
+    if (dict.error) {
+        return pop(dict.error, 'error');
+    }
+    pop('Upload Complete!', 'success');
+    setTimeout(popOut, 1100)
 }
 
 function uploadFailed() {
@@ -91,7 +90,9 @@ function buDeleteArticle(link) {
     if (true) {
         perfDeleteArticle({}, link);
     } else {
-        go_ajax('/control-panel/_article/' + link, 'DELETE', {}, function(dict){perfDeleteArticle(dict,link)});
+        go_ajax('/control-panel/_article/' + link, 'DELETE', {}, function (dict) {
+            perfDeleteArticle(dict, link)
+        });
     }
     //pop(link);
 }
@@ -111,9 +112,9 @@ function buUnpublishArticle(link) {
     var ctx = $('[data-link="' + link + '"]').find('[data-published]');
 
     if (true) {
-        perfUnpublishArticle.call(ctx,{});
+        perfUnpublishArticle.call(ctx, {});
     } else {
-        go_ajax('/control-panel/_article/' + link + '/unpublish', 'PATCH',{}, perfUnpublishArticle, {context:ctx} )
+        go_ajax('/control-panel/_article/' + link + '/unpublish', 'PATCH', {}, perfUnpublishArticle, {context: ctx})
     }
 }
 
@@ -124,7 +125,7 @@ function perfUnpublishArticle(dict) {
 
     $(this).attr('data-published', "false");
     pop('The article has been unpublished', 'success');
-    setTimeout(popOut,1000);
+    setTimeout(popOut, 1000);
 }
 
 function buPublishArticle(link) {
@@ -132,9 +133,9 @@ function buPublishArticle(link) {
     var ctx = $('[data-link="' + link + '"]').find('[data-published]');
 
     if (true) {
-        perfPublishArticle.call(ctx,{});
+        perfPublishArticle.call(ctx, {});
     } else {
-        go_ajax('/control-panel/_article/' + link + '/publish','PATCH', {}, perfPublishArticle, {context:ctx} )
+        go_ajax('/control-panel/_article/' + link + '/publish', 'PATCH', {}, perfPublishArticle, {context: ctx})
     }
 
 }
@@ -145,7 +146,7 @@ function perfPublishArticle(dict) {
     }
     $(this).attr('data-published', "true");
     pop('Article successfully published!', 'success');
-    setTimeout(popOut,1000);
+    setTimeout(popOut, 1000);
 }
 
 function articleContextMenu(e) {
@@ -200,7 +201,7 @@ function perfNewCategory(dict, category_name) {
     );
     popOut();
     pop('Category Successfully Created!', 'success');
-    setTimeout(popOut,500);
+    setTimeout(popOut, 500);
 
 
 }
@@ -211,7 +212,9 @@ function buCreateCategory(category_name) {
         if (true) {
             perfNewCategory({}, category_name);
         } else {
-            go_ajax('/control-panel/_categories', 'POST', {name:category_name}, function(dict){perfNewCategory(dict, category_name)});
+            go_ajax('/control-panel/_categories', 'POST', {name: category_name}, function (dict) {
+                perfNewCategory(dict, category_name)
+            });
         }
     }
 }
@@ -248,7 +251,9 @@ function buDeleteCategory(name) {
     if (true) {
         perfDeleteCategory({}, name);
     } else {
-        go_ajax('/control-panel/_category/' + name, 'DELETE', {}, function(dict){perfDeleteCategory(dict, name)});
+        go_ajax('/control-panel/_category/' + name, 'DELETE', {}, function (dict) {
+            perfDeleteCategory(dict, name)
+        });
     }
 }
 

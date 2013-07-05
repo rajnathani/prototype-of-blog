@@ -1,0 +1,3 @@
+
+
+- Exit (to control panel) button added to the article editor

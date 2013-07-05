@@ -259,8 +259,7 @@ h6 {
 }
 
 .article-content ul,
-.article-content table,
-.article-content pre {
+.article-content table {
     width: 100%;
     margin: 10px 0;
 }

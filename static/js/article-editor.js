@@ -129,10 +129,14 @@ if (skinTesting() ||
             var $article_textarea = $('textarea.article-content');
             var $article_preview = $('#article-preview');
 
+
             $article_preview.html(markDown($article_textarea.val()));
+
 
             $article_textarea.hide();
             $article_preview.show();
+
+            prettyPrint();
         }
         return false;
     });

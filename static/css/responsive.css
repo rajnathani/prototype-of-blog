@@ -233,6 +233,11 @@
         max-width: 510px;
     }
 
+    .comment-form textarea{
+            width:auto;
+        max-width: 510px;
+    }
+
     #article-editor > aside:first-child {
         width: 100%;
     }

@@ -1,5 +1,4 @@
 if (_path_name.match(/^\/?$/) || _path_name.match(/home\.html$/)) {
-
     function evCheckHomeScroll() {
         if ($(document).height() - ($(this).scrollTop() + $(window).height()) < 200) {
             var $last_link = $('.article').last();

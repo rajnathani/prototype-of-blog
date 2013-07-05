@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" type="text/css" href="../static/css/fonts.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/animations.css"/><link rel="stylesheet" type="text/css" href="../static/css/core.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/prettify.css"/><link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
 </head>
 <body>
@@ -69,6 +69,17 @@
                         typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
                         1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
                         book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                        <pre class="p">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Demo | Prettify.JS&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
                         remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
                         sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
                         Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the
@@ -104,7 +115,25 @@
                         printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
                         since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
                         specimen book. It has survived not only five centuries, but also the leap into electronic
-                        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
+                        typesetting, remaining essentially unchanged.
+<pre>
+class Reporter(models.Model):
+    full_name = models.CharField(max_length=70)
+
+    def __unicode__(self):
+        return self.full_name
+
+class Article(models.Model):
+    pub_date = models.DateTimeField()
+    headline = models.CharField(max_length=200)
+    content = models.TextField()
+    reporter = models.ForeignKey(Reporter)
+
+    def __unicode__(self):
+        return self.headline
+</pre>
+
+                        It was popularised in the 1960s with the release
                         of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
                         software like Aldus PageMaker including versions of Lorem Ipsum.
                     </div>
@@ -127,9 +156,10 @@
 
 <script defer src="../static/js/oneminute.js"></script>
 <script defer src="../static/js/jquery.js"></script>
-<script defer src="../static/js/cook.js"></script>
+<script defer src="../static/js/cook.js"></script><script defer src="../static/js/prettify.js"></script>
 <script defer src="../static/js/core.js"></script>
-<script defer src="../static/js/search.js"></script>
+
+<script defer src="../static/js/common.js"></script><script defer src="../static/js/search.js"></script>
 <script defer src="../static/js/home.js"></script>
 
 </body>

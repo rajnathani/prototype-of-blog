@@ -1,5 +1,6 @@
 if (skinTesting() ||
     _path_name.match(/^\/article\//)) {
+
     $('textarea').autosize();
 
     function pageArticleLink() {
@@ -239,8 +240,6 @@ if (skinTesting() ||
         if (dict.error) {
             return pop(dict.error, 'error');
         }
-
-
         var $parent_comment = $('[data-comment-id=' + dict.parent_comment_id + ']');
 
         $parent_comment.find('ul').append(comment(dict));
