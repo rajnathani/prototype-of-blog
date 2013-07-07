@@ -16,6 +16,23 @@
     }
 }
 
+@-webkit-keyframes fly-in {
+    from {
+        -webkit-transform:rotate(150deg);
+    }
+    to {
+        -webkit-transform:rotate(0deg);
+    }
+}
 
 
 
+
+@keyframes fly-in {
+    from {
+        transform:rotate(150deg);
+    }
+    to {
+        transform:rotate(0deg);
+    }
+}

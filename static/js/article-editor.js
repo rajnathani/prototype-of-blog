@@ -142,8 +142,7 @@ if (skinTesting() ||
     });
 
     function markDown(mark_down) {
-        var converter = new Markdown.Converter();
-        return (converter.makeHtml(mark_down));
+        return marked(mark_down);
     }
 
 

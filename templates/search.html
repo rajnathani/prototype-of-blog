@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relfor</title>
+
+
+    <link rel="stylesheet" type="text/css" href="../static/css/fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/animations.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/><link rel="stylesheet" type="text/css" href="../static/css/search.css"/>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/prettify.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
+
+</head>
+<body>
+
+<div id="content">
+    <div id="left-side">
+        <h1 id="head-logo"><a href="home.html">Relfor</a></h1>
+
+        <div id="left-nav">
+            <a href="about.html" class="hover-link">About</a>
+            <a href="projects.html" class="hover-link">Projects</a>
+
+            <form id="search-form" method="get" action="/search"><input value="console" type="text" id="query"
+                                                                        class="hover-link"
+                                                                        name="query"
+
+                                                                        autocomplete="off"/></form>
+            <ul id="search-suggestions"></ul>
+        </div>
+
+    </div>
+    <div id="right-side" class="no-animation">
+        <div id="requested-query" class="gab px40">Search Query: 'Console' (55 hits)</div>
+        <ul id="search-results" class="search-items">
+            <li>
+                <div class="icon-article"></div>
+                <div>It is a good day</div>
+            </li>
+            <li>
+                <div class="icon-category"></div>
+                <div>Command Line</div>
+            </li>
+            <li>
+                <div class="icon-article"></div>
+                <div>It is a good day</div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<script defer src="../static/js/oneminute.js"></script>
+<script defer src="../static/js/jquery.js"></script>
+<script defer src="../static/js/cook.js"></script>
+<script defer src="../static/js/prettify.js"></script>
+<script defer src="../static/js/core.js"></script>
+<script defer src="../static/js/common.js"></script>
+<script defer src="../static/js/search.js"></script>
+<script>
+    window.addEventListener('load', function(){
+       $('input').focus();
+        $('#search-suggestions').empty();
+        // Credits to mr.Y https://groups.google.com/forum/#!topic/jquery-ui-layout/h1tfKuaIIbY
+        if (window.getSelection) {
+            if (window.getSelection().empty) {  // Chrome
+                window.getSelection().empty();
+            } else if (window.getSelection().removeAllRanges) {  // Firefox
+                window.getSelection().removeAllRanges();
+            }
+        } else if (document.selection) {  // IE?
+            document.selection.empty();
+        }
+    });
+</script>
+
+</body>
+
+</html>

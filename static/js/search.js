@@ -195,8 +195,9 @@ function display_search_suggestions(){
 }
 
 function add_suggestion(content, type, link) {
-    jam_search_suggestions.append(li( {'html':'<div class="icon-sprite-holder ' + type + '-sprite"></div>' + bolden_keywords(decodeURI(content)),
-            'mouseover':spotlight_suggestion, 'mouseout':unspotlight_suggestion, 'data-link': '/' + type + '/' + link,
+    jam_search_suggestions.append(li([
+        div({'classes':['search-suggestions-icon','icon-'+type]}), span({html:bolden_keywords(decodeURI(content))})],
+        {'mouseover':spotlight_suggestion, 'mouseout':unspotlight_suggestion, 'data-link': '/' + type + '/' + link,
             'mousedown':function () {
                 window.location.href = $(this).attr('data-link')
             } }

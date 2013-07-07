@@ -254,9 +254,12 @@ h6 {
     line-height: 1.5em;
 }
 
-.article-content li {
+.article-content ul > li {
     margin: 5px 0 5px 21px;
+    list-style: circle;
 }
+
+
 
 .article-content ul,
 .article-content table {
@@ -309,8 +312,12 @@ h6 {
     cursor: default;
     font-size: 40px;
     text-align: right;
-
 }
+
+#head-logo:active, a:active{
+   -webkit-transform:translate(0, 3px);
+}
+
 
 #left-nav {
     margin-top: 35px;
@@ -341,71 +348,6 @@ h6 {
     color: #ff475a !important;
 }
 
-div.icon-sprite-holder {
-    position: absolute;
-    height: 24px;
-    width: 24px;
-    background-image: url('../imgs/nav-icons-sprite.png');
-    background-repeat: no-repeat;
-}
-
-div.article-sprite {
-    background-position: 0 -25px;
-}
-
-div.task-sprite {
-    background-position: 0 -48px;
-}
-
-div.home-sprite {
-    background-position: 0 -1px;
-}
-
-div.members-sprite {
-    background-position: 0 -73px;
-}
-
-div.category-sprite {
-    background-position: 0 -101px;
-}
-
-#search-suggestions li {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    padding: 8px;
-    padding-right: 20px;
-    width: 100%;
-    background-color: white;
-}
-
-#search-suggestions {
-    display: none;
-    width: 200px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    position: absolute;
-    background-color: transparent;
-
-    z-index: 10;
-}
-
-#search-suggestions li {
-    position: relative;
-    cursor: pointer;
-    list-style-type: none;
-
-}
-
-#search-suggestions li#spotlight {
-    background-colo: #facbe5;
-    color: #ff475a;
-}
-
-/*Sprites*/
-#search-suggestions li > div {
-    right: 0px;
-    top: 6px;
-}
 
 #right-side {
     box-sizing: border-box;
@@ -420,7 +362,7 @@ div.category-sprite {
     width: 670px;
 }
 
-#articles li {
+#articles > li {
     margin-bottom: 40px;
     list-style-type: none;
 }
