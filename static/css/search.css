@@ -160,7 +160,7 @@ div.icon-category:after{
 
 
 #search-results li:hover  div[class*=icon-] + div{
-    margin-left: 105px;
+    font-size: 22px;
 }
 
 #search-results li:active  div[class*=icon-] + div{

@@ -140,9 +140,8 @@ function suggestionsDownKey() {
 function search_suggest(search_query) {
     search_query = search_query.toLowerCase();
     if (true){
-        var made_keywords = make_keywords(search_query);
-        perf_search_suggest({'suggestions':[['How to make macaroni and cheese without macaroni', 'article', 'articles.html']]});
-        perf_search_suggest({'suggestions':[['Late Withdrawals', 'category', 'category.html']]})
+        perf_search_suggest({'suggestions':[[  'articles.html', 'a', 'How to make macaroni and cheese without macaroni']]});
+        perf_search_suggest({'suggestions':[[  'category.html','c', 'Late Withdrawals']]})
     } else{
         bring_json('/_search', make_keywords(search_query), perf_search_suggest)
     }
@@ -170,9 +169,9 @@ function make_keywords(query){
         }
     }
     if (exclude_last_word == 1){
-        return {'other-keywords': refined_keywords, 'last-keyword':raw_keywords.pop()};
+        return {'other_keywords': refined_keywords, 'last_keyword':raw_keywords.pop()};
     } else{
-        return {'other-keywords': refined_keywords, 'last-keyword':''};
+        return {'other_keywords': refined_keywords, 'last_keyword':''};
     }
 }
 
@@ -194,10 +193,11 @@ function display_search_suggestions(){
     jam_search_suggestions.show();
 }
 
-function add_suggestion(content, type, link) {
+function add_suggestion(link, type,content) {
+    var entity_type = {'a':'article','c':'category'};
     jam_search_suggestions.append(li([
-        div({'classes':['search-suggestions-icon','icon-'+type]}), span({html:bolden_keywords(decodeURI(content))})],
-        {'mouseover':spotlight_suggestion, 'mouseout':unspotlight_suggestion, 'data-link': '/' + type + '/' + link,
+        div({'classes':['search-suggestions-icon','icon-'+entity_type[type]]}), span({html:bolden_keywords(decodeURI(content))})],
+        {'mouseover':spotlight_suggestion, 'mouseout':unspotlight_suggestion, 'data-link': '/' + entity_type[type] + '/' + link,
             'mousedown':function () {
                 window.location.href = $(this).attr('data-link')
             } }
