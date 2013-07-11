@@ -24,7 +24,7 @@
             <a href="about.html" class="hover-link">About</a>
             <a href="projects.html" class="hover-link">Projects</a>
 
-            <form id="search-form" method="get" action="/search"><input value="console" type="text" id="query"
+            <form id="search-form" method="get" action="/search"><input type="text" id="query"
                                                                         class="hover-link"
                                                                         name="query" maxlength="100"
 
@@ -69,10 +69,12 @@
 <script>
     document.querySelector('input').value = document.getElementById('search-queried').innerText;
     window.addEventListener('load', function () {
-        $('input').focus();
+
+        $('#query').focus();
+
         $('#search-suggestions').empty();
         // Credits to mr.Y https://groups.google.com/forum/#!topic/jquery-ui-layout/h1tfKuaIIbY
-        if (window.getSelection) {
+        /*if (window.getSelection) {
             if (window.getSelection().empty) {  // Chrome
                 window.getSelection().empty();
             } else if (window.getSelection().removeAllRanges) {  // Firefox
@@ -80,7 +82,7 @@
             }
         } else if (document.selection) {  // IE?
             document.selection.empty();
-        }
+        } */
     });
 </script>
 
