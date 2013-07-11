@@ -20,7 +20,7 @@
             <a href="projects.html" class="hover-link">Projects</a>
 
             <form id="search-form" method="get" action="/search"><input value="Search" type="text" id="query"
-                                                                        class="hover-link" name="query"
+                                                                        class="hover-link" name="query" maxlength="100"
                                                                         autocomplete="off"/></form>
             <ul id="search-suggestions"></ul>
         </div>
@@ -56,7 +56,7 @@
             </div>
             <div id="comments-section">
                 <h4 class="gab">Comments Section</h4>
-                <div class="loading more-comments"></div>
+                <div class="loading comments"></div>
                 <ul>
                     <!--li class="cf" data-comment-id="12">
                         <img height="70" width="70"

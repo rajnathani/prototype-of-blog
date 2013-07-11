@@ -206,6 +206,7 @@ h6 {
 
 .slide-left {
     -webkit-animation: slide-left-fade-in 520ms;
+    animation: slide-left-fade-in 520ms;
 }
 
 .article-content, .article-content * {
@@ -274,6 +275,7 @@ h6 {
 
 #head-logo:active, a:active{
    -webkit-transform:translate(0, 3px);
+    transform:translate(0, 3px);
 }
 
 
@@ -314,6 +316,7 @@ h6 {
     width: auto;
     margin-left: 21%;
     -webkit-animation: slide-left-fade-in 520ms;
+    animation: slide-left-fade-in 520ms;
 }
 
 #right-side.constricted {
@@ -343,6 +346,7 @@ h6 {
     width: 600px;
     max-width: 600px;
     -webkit-animation: slide-down-fade-in 520ms;
+    animation: slide-down-fade-in 520ms;
 }
 
 .article div {
@@ -357,6 +361,7 @@ h6 {
     max-width: 300px;
     padding-top: 50px;
     -webkit-animation: slide-left-fade-in 1020ms;
+    animation: slide-down-fade-in 1020ms;
 }
 
 .article-meta > div:first-child {
@@ -442,6 +447,7 @@ h6 {
 #tech-list li li {
     list-style-type: circle;
     -webkit-animation:slide-left-fade-in 200ms;
+    animation:slide-left-fade-in 200ms;
 }
 
 #tech-list  li li li{
@@ -460,11 +466,14 @@ h6 {
     height: 130px;
     list-style-type: none;
     -webkit-animation: slide-right-fade-in 520ms;
+    animation: slide-right-fade-in 520ms;
 }
 
 .project-list li:nth-child(even) {
     text-align: right;
     -webkit-animation: slide-left-fade-in 520ms;
+    animation: slide-left-fade-in 520ms;
+
 }
 
 
@@ -683,6 +692,7 @@ position: absolute;
     background-position: top left;
 
     -webkit-transition: background 2000ms;
+    transition: background 2000ms;
 }
 
 .pictures-grid > div:hover {

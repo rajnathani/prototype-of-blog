@@ -29,17 +29,39 @@
     }
 }
 
-@-webkit-keyframes logo-show {
-    0% {
 
-        -webkit-transform: rotate(0deg);
+
+@keyframes slide-left-fade-in {
+    from {
+        transform: translate(25px, 0);
+        opacity: 0.2;
     }
-    100% {
-
-        -webkit-transform: rotate(360deg);
+    to {
+        transform: translate(0, 0);
     }
-
 }
+
+@keyframes slide-right-fade-in {
+    from {
+        transform: translate(-25px, 0);
+        opacity: 0.2;
+    }
+    to {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes slide-down-fade-in {
+    from {
+        transform: translate(0, -25px);
+        opacity: 0.2;
+    }
+    to {
+        transform: translate(0, 0);
+    }
+}
+
+
 
 @-webkit-keyframes fade-in-out {
     from {

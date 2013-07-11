@@ -164,6 +164,5 @@ div.icon-category:after{
 }
 
 #search-results li:active  div[class*=icon-] + div{
-       font-size: 17px;
-
+     color: rgb(40,40,40);
 }

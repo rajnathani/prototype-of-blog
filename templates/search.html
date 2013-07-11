@@ -6,7 +6,8 @@
 
     <link rel="stylesheet" type="text/css" href="../static/css/fonts.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/animations.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/><link rel="stylesheet" type="text/css" href="../static/css/search.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/search.css"/>
 
     <link rel="stylesheet" type="text/css" href="../static/css/prettify.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
@@ -25,7 +26,7 @@
 
             <form id="search-form" method="get" action="/search"><input value="console" type="text" id="query"
                                                                         class="hover-link"
-                                                                        name="query"
+                                                                        name="query" maxlength="100"
 
                                                                         autocomplete="off"/></form>
             <ul id="search-suggestions"></ul>
@@ -33,19 +34,25 @@
 
     </div>
     <div id="right-side" class="no-animation">
-        <div id="requested-query" class="gab px40">Search Query: 'Console' (55 hits)</div>
+        <div id="requested-query" class="gab px40">Search Query: '<span id="search-queried">Console</span>' (55 hits)</div>
         <ul id="search-results" class="search-items">
             <li>
-                <div class="icon-article"></div>
-                <div>It is a good day</div>
+                <a href="#">
+                    <div class="icon-article"></div>
+                    <div>It is a good day</div>
+                </a>
             </li>
             <li>
-                <div class="icon-category"></div>
-                <div>Command Line</div>
+                <a href="#">
+                    <div class="icon-category"></div>
+                    <div>Command Line</div>
+                </a>
             </li>
             <li>
-                <div class="icon-article"></div>
-                <div>It is a good day</div>
+                <a href="#">
+                    <div class="icon-article"></div>
+                    <div>It is a good day</div>
+                </a>
             </li>
         </ul>
     </div>
@@ -60,8 +67,9 @@
 <script defer src="../static/js/common.js"></script>
 <script defer src="../static/js/search.js"></script>
 <script>
-    window.addEventListener('load', function(){
-       $('input').focus();
+    document.querySelector('input').value = document.getElementById('search-queried').innerText;
+    window.addEventListener('load', function () {
+        $('input').focus();
         $('#search-suggestions').empty();
         // Credits to mr.Y https://groups.google.com/forum/#!topic/jquery-ui-layout/h1tfKuaIIbY
         if (window.getSelection) {

@@ -8,7 +8,7 @@ if (skinTesting() ||
     }
 
     function evLoadComments() {
-        $('.loading.more-comments').show();
+        $('.loading.comments').show();
         if (true) {
             setTimeout(function () {
                 var comments = {comments: [
@@ -50,8 +50,7 @@ if (skinTesting() ||
 
         else {
             go_ajax(_path_name + '/_comments', 'GET', perfLoadComments, {'error': function () {
-
-                return $('.loading.more-comments').removeClass('more-comments').show().html(span('Error Retrieving Comments',
+                return $('.loading.comments').removeClass('comments').show().html(span('Error Retrieving Comments',
                     {'class': 'color'}).outerHTML);
 
 
@@ -62,7 +61,7 @@ if (skinTesting() ||
     function perfLoadComments(dict) {
         console.log(dict);
         if (dict.error) {
-            return $('.loading.more-comments').after(
+            return $('.loading.comments').after(
                 div('Error Retrieving Comments', {'class': 'color', style: 'font-size:20px; margin-bottom:25px'})).hide();
         }
 
@@ -226,7 +225,7 @@ if (skinTesting() ||
             img({src: dict.img, height: 70, width: 70}),
             div(dict.content),
             div({'class': 'comment-meta'}, [
-                dict.relfor ? span(dict.name, { 'class': 'color gab'}) :
+                dict.relfor ? span(dict.name, { 'class': 'color'}) :
                     (dict.website ? a(dict.name, {'href': dict.website, 'class': 'hover-link'}) : span(dict.name)), br(),
                 span({'data-timestamp': dict.created, 'data-time-mode': '2'}), br(),
                 options.children ?  button({'class': 'bu-form-reply-comment', 'click': buFormReplyComment}) : null
