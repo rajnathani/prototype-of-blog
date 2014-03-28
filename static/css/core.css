@@ -213,8 +213,12 @@ h6 {
     line-height: 1.5em;
 }
 
+
+.article-content ol > li,
 .article-content ul > li {
-    margin: 5px 0 5px 21px;
+   margin: 5px 0 5px 21px;
+}
+.article-content ul > li {
     list-style: circle;
 }
 

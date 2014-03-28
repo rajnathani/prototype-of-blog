@@ -5,8 +5,11 @@
 
 
     <link rel="stylesheet" type="text/css" href="../static/css/fonts.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/animations.css"/><link rel="stylesheet" type="text/css" href="../static/css/core.css"/><link rel="stylesheet" type="text/css" href="../static/css/search.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/prettify.css"/><link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/animations.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/core.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/search.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/prettify.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/responsive.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/popscript.css"/>
 </head>
 <body>
@@ -36,27 +39,38 @@
                         typesetting industry</a></h1>
 
                     <div class="article-content">
-                        <p>A BSD licensed open source JavaScript library providing functions to facilitate easier creation of DOM elements, on the browser side.
-                            The API and download links can be found on cook&#39;s webpage at <a href="http://cook.relfor.co">cook.relfor.co</a></p>
+                        <p>A BSD licensed open source JavaScript library providing functions to facilitate easier
+                            creation of DOM elements, on the browser side.
+                            The API and download links can be found on cook&#39;s webpage at <a
+                                    href="http://cook.relfor.co">cook.relfor.co</a></p>
+
                         <h1>API</h1>
                         <pre><code>cook(tag [, first_parameter] [, second_parameter] [, third_parameter])</code></pre>
                         <p><code>tag</code> represents the html tag, example &quot;span&quot;, &quot;div&quot;,etc.
-                            <code>first_parameter</code> , <code>second_parameter</code> , and <code>third_parameter</code> can either be any of the following.
+                            <code>first_parameter</code> , <code>second_parameter</code> , and
+                            <code>third_parameter</code> can either be any of the following.
                             <strong>The order of the parameters do NOT matter</strong></p>
                         <ul>
-                            <li>string: this string will be the inner text of the created node,, customizing how &#39;text&#39; is interpreted can be modified, more <a href="#text-html-config">here</a>
-                                Example:</li>
+                            <li>string: this string will be the inner text of the created node,, customizing how &#39;text&#39;
+                                is interpreted can be modified, more <a href="#text-html-config">here</a>
+                                Example:
+                            </li>
                         </ul>
                         <pre><code>cook(&#39;span&#39;, &#39;hello world&#39;)</code></pre>
                         <ul>
-                            <li>array (of nodes): the nodes of the array in order as they are given will be the children, example:</li>
+                            <li>array (of nodes): the nodes of the array in order as they are given will be the
+                                children, example:
+                            </li>
                         </ul>
 <pre><code>cook(&#39;span&#39;, [
     cook(&#39;i&#39;, &#39;hello&#39;),
     cook(&#39;b&#39;, &#39;world&#39;)
     ])</code></pre>
                         <ul>
-                            <li>dictionary:  this dictionary contains details of the created node, which include attributes, properties, events, and more. The keys have the corresponding values, note that the keys are case insensitive:</li>
+                            <li>dictionary: this dictionary contains details of the created node, which include
+                                attributes, properties, events, and more. The keys have the corresponding values, note
+                                that the keys are case insensitive:
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -166,10 +180,12 @@ class Article(models.Model):
 
 <script defer src="../static/js/oneminute.js"></script>
 <script defer src="../static/js/jquery.js"></script>
-<script defer src="../static/js/cook.js"></script><script defer src="../static/js/prettify.js"></script>
+<script defer src="../static/js/cook.js"></script>
+<script defer src="../static/js/prettify.js"></script>
 <script defer src="../static/js/core.js"></script>
 
-<script defer src="../static/js/common.js"></script><script defer src="../static/js/search.js"></script>
+<script defer src="../static/js/common.js"></script>
+<script defer src="../static/js/search.js"></script>
 <script defer src="../static/js/home.js"></script>
 
 </body>
